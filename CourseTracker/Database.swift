@@ -29,32 +29,19 @@ public extension NSManagedObject {
     }
     
     public class func findFirstByAttribute<T>(attribute: String, value: AnyObject) -> T? {
-        let request = self.fetchRequest()
+        let request = fetchRequest()
         request.predicate = NSPredicate(format: "%K = %@", argumentArray: [attribute, value])
         request.fetchLimit = 1
-        let context = self.defaultContext()
+        let context = defaultContext()
         return context.executeFetchRequest(request)?.first as? T
     }
     
     public class func entityName() -> String {
-        return self.entityNameForClass(self)
-    }
-    
-    public class func entityNameForClass(theClass: NSManagedObject.Type) -> String {
-        return NSStringFromClass(theClass).componentsSeparatedByString(".").last!
+        return NSStringFromClass(self).componentsSeparatedByString(".").last!
     }
     
     public class func entityDescription() -> NSEntityDescription {
         return NSEntityDescription.entityForName(entityName(), inManagedObjectContext: defaultContext())!
-    }
-    
-    /*
-    * Usage pattern is as follows:
-    *
-    * let instanceName: ClassName = ClassName.newObjectInContext(managedObjectContext)
-    */
-    public class func newObjectInContext<T: NSManagedObject>(context: NSManagedObjectContext) -> T {
-        return NSEntityDescription.insertNewObjectForEntityForName(self.entityName(), inManagedObjectContext: context) as! T
     }
     
     public class func fetchRequest() -> NSFetchRequest {
