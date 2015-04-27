@@ -13,11 +13,13 @@
 		1CD102681AEE7E9500AC6122 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD102661AEE7E9500AC6122 /* Main.storyboard */; };
 		1CD1026A1AEE7E9500AC6122 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CD102691AEE7E9500AC6122 /* Images.xcassets */; };
 		1CD1026D1AEE7E9500AC6122 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD1026B1AEE7E9500AC6122 /* LaunchScreen.xib */; };
-		1CD102791AEE7E9500AC6122 /* CourseTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD102781AEE7E9500AC6122 /* CourseTrackerTests.swift */; };
+		1CD102791AEE7E9500AC6122 /* CourseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD102781AEE7E9500AC6122 /* CourseTests.swift */; };
 		1CD1028F1AEE8CBB00AC6122 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1028B1AEE8CBB00AC6122 /* Course.swift */; };
 		1CD102901AEE8CBB00AC6122 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1028C1AEE8CBB00AC6122 /* Run.swift */; };
 		1CD102911AEE8CBB00AC6122 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1028D1AEE8CBB00AC6122 /* Runner.swift */; };
 		1CD102921AEE8CBB00AC6122 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1028E1AEE8CBB00AC6122 /* Team.swift */; };
+		1CD1029A1AEE97D100AC6122 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD102991AEE97D100AC6122 /* TestHelper.swift */; };
+		1CD1029F1AEE996200AC6122 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1029E1AEE996200AC6122 /* Database.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,11 +43,13 @@
 		1CD1026C1AEE7E9500AC6122 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		1CD102721AEE7E9500AC6122 /* CourseTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CourseTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD102771AEE7E9500AC6122 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1CD102781AEE7E9500AC6122 /* CourseTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTrackerTests.swift; sourceTree = "<group>"; };
+		1CD102781AEE7E9500AC6122 /* CourseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTests.swift; sourceTree = "<group>"; };
 		1CD1028B1AEE8CBB00AC6122 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		1CD1028C1AEE8CBB00AC6122 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		1CD1028D1AEE8CBB00AC6122 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		1CD1028E1AEE8CBB00AC6122 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		1CD102991AEE97D100AC6122 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		1CD1029E1AEE996200AC6122 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +91,9 @@
 		1CD1025C1AEE7E9500AC6122 /* CourseTracker */ = {
 			isa = PBXGroup;
 			children = (
-				1CD102821AEE8B0C00AC6122 /* Models */,
 				1CD1025F1AEE7E9500AC6122 /* AppDelegate.swift */,
-				1CD102641AEE7E9500AC6122 /* ViewController.swift */,
+				1CD102821AEE8B0C00AC6122 /* Models */,
+				1CD102931AEE909700AC6122 /* Controllers */,
 				1CD102661AEE7E9500AC6122 /* Main.storyboard */,
 				1CD102691AEE7E9500AC6122 /* Images.xcassets */,
 				1CD1026B1AEE7E9500AC6122 /* LaunchScreen.xib */,
@@ -110,7 +114,8 @@
 		1CD102751AEE7E9500AC6122 /* CourseTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				1CD102781AEE7E9500AC6122 /* CourseTrackerTests.swift */,
+				1CD102781AEE7E9500AC6122 /* CourseTests.swift */,
+				1CD102991AEE97D100AC6122 /* TestHelper.swift */,
 				1CD102761AEE7E9500AC6122 /* Supporting Files */,
 			);
 			path = CourseTrackerTests;
@@ -127,12 +132,21 @@
 		1CD102821AEE8B0C00AC6122 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1CD1029E1AEE996200AC6122 /* Database.swift */,
 				1CD1028B1AEE8CBB00AC6122 /* Course.swift */,
 				1CD1028C1AEE8CBB00AC6122 /* Run.swift */,
 				1CD1028D1AEE8CBB00AC6122 /* Runner.swift */,
 				1CD1028E1AEE8CBB00AC6122 /* Team.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		1CD102931AEE909700AC6122 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1CD102641AEE7E9500AC6122 /* ViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +253,7 @@
 				1CD102651AEE7E9500AC6122 /* ViewController.swift in Sources */,
 				1CD102921AEE8CBB00AC6122 /* Team.swift in Sources */,
 				1CD102601AEE7E9500AC6122 /* AppDelegate.swift in Sources */,
+				1CD1029F1AEE996200AC6122 /* Database.swift in Sources */,
 				1CD102911AEE8CBB00AC6122 /* Runner.swift in Sources */,
 				1CD102901AEE8CBB00AC6122 /* Run.swift in Sources */,
 				1CD102631AEE7E9500AC6122 /* CourseTracker.xcdatamodeld in Sources */,
@@ -249,7 +264,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CD102791AEE7E9500AC6122 /* CourseTrackerTests.swift in Sources */,
+				1CD102791AEE7E9500AC6122 /* CourseTests.swift in Sources */,
+				1CD1029A1AEE97D100AC6122 /* TestHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
