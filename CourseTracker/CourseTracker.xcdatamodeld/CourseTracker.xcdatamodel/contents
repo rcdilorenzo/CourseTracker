@@ -2,18 +2,18 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D131" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Course" representedClassName="CourseTracker.Course" syncable="YES">
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="course" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="Run" representedClassName="CourseTracker.Run" syncable="YES">
-        <attribute name="end" attributeType="Date" syncable="YES"/>
-        <attribute name="start" attributeType="Date" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="runners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Runner" inverseName="runs" inverseEntity="Runner" syncable="YES"/>
     </entity>
     <entity name="Runner" representedClassName="CourseTracker.Runner" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 16" minValueString="1" maxValueString="120" syncable="YES"/>
-        <attribute name="firstName" attributeType="String" syncable="YES"/>
-        <attribute name="lastName" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="runs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Run" inverseName="runners" inverseEntity="Run" syncable="YES"/>
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="runners" inverseEntity="Team" syncable="YES"/>
     </entity>

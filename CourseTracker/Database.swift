@@ -21,6 +21,31 @@ extension NSManagedObjectContext {
         }
         return objects as! [NSManagedObject]?
     }
+    
+    func beginTransaction() {
+        undoManager = NSUndoManager()
+        undoManager!.beginUndoGrouping()
+    }
+    
+    func endTransactions() {
+        while undoManager?.groupingLevel > 0 {
+            undoManager?.endUndoGrouping()
+        }
+    }
+    
+    func undoTransaction() {
+        endTransactions()
+        undoManager?.undo()
+    }
+    
+    func save() -> Bool {
+        var error: NSError? = nil
+        let success = save(&error)
+        if error != nil {
+            println("Save error: \(error)")
+        }
+        return success
+    }
 }
 
 public extension NSManagedObject {
@@ -46,5 +71,12 @@ public extension NSManagedObject {
     
     public class func fetchRequest() -> NSFetchRequest {
         return NSFetchRequest(entityName: self.entityName())
+    }
+    
+    public func validationError(description: String) -> NSError {
+        let userInfo = NSMutableDictionary()
+        userInfo[NSLocalizedFailureReasonErrorKey] = description
+        userInfo[NSValidationObjectErrorKey] = self
+        return NSError(domain: "Domain", code: NSManagedObjectValidationError, userInfo: userInfo as [NSObject : AnyObject])
     }
 }

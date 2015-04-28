@@ -15,7 +15,7 @@ class TeamTests: XCTestCase {
     let context: NSManagedObjectContext = inMemoryContext()
     
     func testGettingRuns() {
-        let team = Team(name: "My Team", color: "#fff")
+        let team = Team(name: "My Team", color: UIColor.blackColor())
         
         let firstRunner = Runner(firstName: "John", lastName: "Doe", age: 13, team: team)
         let secondRunner = Runner(firstName: "Jane", lastName: "Doe", age: 11, team: team)

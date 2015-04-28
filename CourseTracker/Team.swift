@@ -9,15 +9,21 @@
 import Foundation
 import CoreData
 import Dollar
+import UIKit
 
 public class Team: NSManagedObject {
 
-    @NSManaged var color: AnyObject
-    @NSManaged var name: String
+    @NSManaged var color: UIColor?
+    @NSManaged var name: String?
     @NSManaged var course: Course
     @NSManaged var runners: NSSet
     
-    public convenience init(name: String, color: String) {
+    public convenience init(course: Course) {
+        self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+        self.course = course
+    }
+    
+    public convenience init(name: String, color: UIColor) {
         self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
         self.name = name
         self.color = color
