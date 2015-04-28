@@ -15,8 +15,8 @@ public class Run: NSManagedObject {
     @NSManaged var start: NSDate
     @NSManaged var runners: NSSet
 
-    public init(runners: NSSet) {
-        super.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+    public convenience init(runners: NSSet) {
+        self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
         self.runners = runners
     }
 }

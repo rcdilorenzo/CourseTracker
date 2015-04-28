@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C85ABB81AEF271A00F10114 /* Dollar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C85ABB71AEF271A00F10114 /* Dollar.framework */; };
+		1C85ABBE1AEF2D9200F10114 /* NewCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C85ABBD1AEF2D9200F10114 /* NewCourseController.swift */; };
 		1CC550B91AEF1F630003EA8B /* TeamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC550B81AEF1F630003EA8B /* TeamTests.swift */; };
 		1CD102601AEE7E9500AC6122 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1025F1AEE7E9500AC6122 /* AppDelegate.swift */; };
 		1CD102631AEE7E9500AC6122 /* CourseTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CD102611AEE7E9500AC6122 /* CourseTracker.xcdatamodeld */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		1C85ABB71AEF271A00F10114 /* Dollar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dollar.framework; path = ../Carthage/Build/iOS/Dollar.framework; sourceTree = "<group>"; };
+		1C85ABBD1AEF2D9200F10114 /* NewCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCourseController.swift; sourceTree = "<group>"; };
 		1CC550B81AEF1F630003EA8B /* TeamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTests.swift; sourceTree = "<group>"; };
 		1CD1025A1AEE7E9500AC6122 /* CourseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD1025E1AEE7E9500AC6122 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		1CD1025D1AEE7E9500AC6122 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1C85ABB71AEF271A00F10114 /* Dollar.framework */,
 				1CD1025E1AEE7E9500AC6122 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -120,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				1CD102781AEE7E9500AC6122 /* CourseTests.swift */,
+				1CC550B81AEF1F630003EA8B /* TeamTests.swift */,
 				1CD102991AEE97D100AC6122 /* TestHelper.swift */,
 				1CD102761AEE7E9500AC6122 /* Supporting Files */,
 			);
@@ -150,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				1CD102641AEE7E9500AC6122 /* ViewController.swift */,
+				1C85ABBD1AEF2D9200F10114 /* NewCourseController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 				1CD102561AEE7E9500AC6122 /* Sources */,
 				1CD102571AEE7E9500AC6122 /* Frameworks */,
 				1CD102581AEE7E9500AC6122 /* Resources */,
+				1C85ABBA1AEF28F000F10114 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -249,15 +255,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1C85ABBA1AEF28F000F10114 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Dollar.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1CD102561AEE7E9500AC6122 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CC550B41AEEEC220003EA8B /* TeamEmbedController.swift in Sources */,
 				1CD1028F1AEE8CBB00AC6122 /* Course.swift in Sources */,
+				1C85ABBC1AEF2B9400F10114 /* TeamRankCell.swift in Sources */,
 				1CD102651AEE7E9500AC6122 /* ViewController.swift in Sources */,
 				1CD102921AEE8CBB00AC6122 /* Team.swift in Sources */,
+				1CC550B71AEF1BCA0003EA8B /* TeamCardController.swift in Sources */,
 				1CD102601AEE7E9500AC6122 /* AppDelegate.swift in Sources */,
+				1C85ABBE1AEF2D9200F10114 /* NewCourseController.swift in Sources */,
 				1CD1029F1AEE996200AC6122 /* Database.swift in Sources */,
 				1CD102911AEE8CBB00AC6122 /* Runner.swift in Sources */,
 				1CD102901AEE8CBB00AC6122 /* Run.swift in Sources */,
@@ -270,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CD102791AEE7E9500AC6122 /* CourseTests.swift in Sources */,
+				1CC550B91AEF1F630003EA8B /* TeamTests.swift in Sources */,
 				1CD1029A1AEE97D100AC6122 /* TestHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,6 +419,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = CourseTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -401,6 +433,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = CourseTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -460,6 +496,7 @@
 				1CD1027E1AEE7E9500AC6122 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1CD1027F1AEE7E9500AC6122 /* Build configuration list for PBXNativeTarget "CourseTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +505,7 @@
 				1CD102811AEE7E9500AC6122 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

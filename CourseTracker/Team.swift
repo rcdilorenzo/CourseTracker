@@ -17,8 +17,8 @@ public class Team: NSManagedObject {
     @NSManaged var course: Course
     @NSManaged var runners: NSSet
     
-    public init(name: String, color: String) {
-        super.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+    public convenience init(name: String, color: String) {
+        self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
         self.name = name
         self.color = color
     }

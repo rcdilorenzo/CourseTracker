@@ -17,8 +17,8 @@ public class Runner: NSManagedObject {
     @NSManaged var team: Team
     @NSManaged var runs: NSSet
     
-    public init(firstName: String!, lastName: String!, age: Int, team: Team) {
-        super.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+    public convenience init(firstName: String!, lastName: String!, age: Int, team: Team) {
+        self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
         self.firstName = firstName
         self.lastName = lastName
         self.age = age

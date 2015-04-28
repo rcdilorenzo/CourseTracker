@@ -18,8 +18,8 @@ public class Course: NSManagedObject {
     @NSManaged var name: String!
     @NSManaged var teams: NSSet
     
-    public init(name: String!, details: String?) {
-        super.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+    public convenience init(name: String!, details: String?) {
+        self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
         self.name = name
         self.details = details
     }
