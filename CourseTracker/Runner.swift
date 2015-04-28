@@ -9,12 +9,25 @@
 import Foundation
 import CoreData
 
-class Runner: NSManagedObject {
+public class Runner: NSManagedObject {
 
     @NSManaged var age: NSNumber
     @NSManaged var firstName: String
     @NSManaged var lastName: String
-    @NSManaged var team: NSManagedObject
+    @NSManaged var team: Team
     @NSManaged var runs: NSSet
+    
+    public init(firstName: String!, lastName: String!, age: Int, team: Team) {
+        super.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+        self.firstName = firstName
+        self.lastName = lastName
+        self.age = age
+        self.team = team
+    }
+    
+    public func addRun(run: Run) {
+        let _runs = mutableSetValueForKey("runs")
+        _runs.addObject(run)
+    }
 
 }

@@ -8,12 +8,27 @@
 
 import Foundation
 import CoreData
+import Dollar
 
-class Team: NSManagedObject {
+public class Team: NSManagedObject {
 
     @NSManaged var color: AnyObject
     @NSManaged var name: String
-    @NSManaged var course: NSManagedObject
+    @NSManaged var course: Course
     @NSManaged var runners: NSSet
+    
+    public init(name: String, color: String) {
+        super.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+        self.name = name
+        self.color = color
+    }
+    
+    public func runs() -> [Run] {
+        var runs: Array<Run> = []
+        for runner in runners.allObjects as! [Runner] {
+            runs += runner.runs.allObjects as! [Run]
+        }
+        return $.uniq(runs, by: { $0.objectID })
+    }
 
 }

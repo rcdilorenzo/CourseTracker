@@ -32,7 +32,7 @@ public class Course: NSManagedObject {
     
     public class func current() -> Course? {
         if let name = userDefaults.valueForKey(courseDefaultKey) as? String {
-            return self.findFirstByAttribute("name", value: name)
+            return findFirstByAttribute("name", value: name)
         } else {
             return nil
         }

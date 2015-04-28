@@ -1,3 +1,4 @@
 *.xcuserstate
 *.xccheckout
 */**/xcdebugger/
+Carthage/

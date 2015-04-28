@@ -9,10 +9,14 @@
 import Foundation
 import CoreData
 
-class Run: NSManagedObject {
+public class Run: NSManagedObject {
 
     @NSManaged var end: NSDate
     @NSManaged var start: NSDate
     @NSManaged var runners: NSSet
 
+    public init(runners: NSSet) {
+        super.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+        self.runners = runners
+    }
 }
