@@ -6,4 +6,10 @@
 //  Copyright (c) 2015 Christian Di Lorenzo. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class TeamRankCell : UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
+}

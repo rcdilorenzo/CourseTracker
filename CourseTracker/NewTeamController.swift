@@ -22,6 +22,7 @@ class NewTeamController: UITableViewController, UITextFieldDelegate {
         preferredContentSize = CGSizeMake(320, 145)
         selectedColor.backgroundColor = UIColor.clearColor()
         selectedColor.layer.cornerRadius = selectedColor.frame.size.width / 2.0
+        navigationController?.navigationBar.tintColor = primaryColor()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -41,7 +42,9 @@ class NewTeamController: UITableViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
         } else if context.save() {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismissViewControllerAnimated(true, completion: {
+                NSNotificationCenter.defaultCenter().postNotificationName("NewTeamAdded", object: nil)
+            })
         }
     }
     

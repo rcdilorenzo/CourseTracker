@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C4B020D1AF7A678009F8BBD /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */; };
 		1C85ABB81AEF271A00F10114 /* Dollar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C85ABB71AEF271A00F10114 /* Dollar.framework */; };
+		1C85ABBC1AEF2B9400F10114 /* TeamRankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C85ABBB1AEF2B9400F10114 /* TeamRankCell.swift */; };
 		1C85ABBE1AEF2D9200F10114 /* NewCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C85ABBD1AEF2D9200F10114 /* NewCourseController.swift */; };
+		1CC550B41AEEEC220003EA8B /* TeamEmbedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC550B31AEEEC220003EA8B /* TeamEmbedController.swift */; };
+		1CC550B71AEF1BCA0003EA8B /* TeamCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC550B61AEF1BCA0003EA8B /* TeamCardController.swift */; };
 		1CC550B91AEF1F630003EA8B /* TeamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC550B81AEF1F630003EA8B /* TeamTests.swift */; };
 		1CCC27CF1AF00B5000CD8E06 /* NewTeamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCC27CE1AF00B5000CD8E06 /* NewTeamController.swift */; };
 		1CD102601AEE7E9500AC6122 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1025F1AEE7E9500AC6122 /* AppDelegate.swift */; };
@@ -37,8 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		1C85ABB71AEF271A00F10114 /* Dollar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dollar.framework; path = ../Carthage/Build/iOS/Dollar.framework; sourceTree = "<group>"; };
+		1C85ABBB1AEF2B9400F10114 /* TeamRankCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamRankCell.swift; sourceTree = "<group>"; };
 		1C85ABBD1AEF2D9200F10114 /* NewCourseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCourseController.swift; sourceTree = "<group>"; };
+		1CC550B31AEEEC220003EA8B /* TeamEmbedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamEmbedController.swift; sourceTree = "<group>"; };
+		1CC550B61AEF1BCA0003EA8B /* TeamCardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCardController.swift; sourceTree = "<group>"; };
 		1CC550B81AEF1F630003EA8B /* TeamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTests.swift; sourceTree = "<group>"; };
 		1CCC27CE1AF00B5000CD8E06 /* NewTeamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTeamController.swift; sourceTree = "<group>"; };
 		1CD1025A1AEE7E9500AC6122 /* CourseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1CC550B51AEF1BBA0003EA8B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1C85ABBB1AEF2B9400F10114 /* TeamRankCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		1CD102511AEE7E9500AC6122 = {
 			isa = PBXGroup;
 			children = (
@@ -101,8 +117,10 @@
 			isa = PBXGroup;
 			children = (
 				1CD1025F1AEE7E9500AC6122 /* AppDelegate.swift */,
+				1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */,
 				1CD102821AEE8B0C00AC6122 /* Models */,
 				1CD102931AEE909700AC6122 /* Controllers */,
+				1CC550B51AEF1BBA0003EA8B /* Views */,
 				1CD102661AEE7E9500AC6122 /* Main.storyboard */,
 				1CD102691AEE7E9500AC6122 /* Images.xcassets */,
 				1CD1026B1AEE7E9500AC6122 /* LaunchScreen.xib */,
@@ -156,6 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				1CD102641AEE7E9500AC6122 /* ViewController.swift */,
+				1CC550B31AEEEC220003EA8B /* TeamEmbedController.swift */,
+				1CC550B61AEF1BCA0003EA8B /* TeamCardController.swift */,
 				1C85ABBD1AEF2D9200F10114 /* NewCourseController.swift */,
 				1CCC27CE1AF00B5000CD8E06 /* NewTeamController.swift */,
 			);
@@ -287,6 +307,7 @@
 				1CD102921AEE8CBB00AC6122 /* Team.swift in Sources */,
 				1CC550B71AEF1BCA0003EA8B /* TeamCardController.swift in Sources */,
 				1CD102601AEE7E9500AC6122 /* AppDelegate.swift in Sources */,
+				1C4B020D1AF7A678009F8BBD /* ColorPalette.swift in Sources */,
 				1CCC27CF1AF00B5000CD8E06 /* NewTeamController.swift in Sources */,
 				1C85ABBE1AEF2D9200F10114 /* NewCourseController.swift in Sources */,
 				1CD1029F1AEE996200AC6122 /* Database.swift in Sources */,

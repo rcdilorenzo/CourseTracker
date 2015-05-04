@@ -43,6 +43,8 @@ extension NSManagedObjectContext {
         let success = save(&error)
         if error != nil {
             println("Save error: \(error)")
+        } else {
+            println("Database saved.")
         }
         return success
     }
@@ -61,6 +63,16 @@ public extension NSManagedObject {
         return context.executeFetchRequest(request)?.first as? T
     }
     
+    public class func findAllByAttribute(attribute: String, value: AnyObject) -> [NSManagedObject] {
+        let request = fetchRequest()
+        request.predicate = NSPredicate(format: "%K = %@", argumentArray: [attribute, value])
+        let context = defaultContext()
+        if let objects = context.executeFetchRequest(request) {
+            return objects
+        }
+        return []
+    }
+    
     public class func entityName() -> String {
         return NSStringFromClass(self).componentsSeparatedByString(".").last!
     }
@@ -71,12 +83,5 @@ public extension NSManagedObject {
     
     public class func fetchRequest() -> NSFetchRequest {
         return NSFetchRequest(entityName: self.entityName())
-    }
-    
-    public func validationError(description: String) -> NSError {
-        let userInfo = NSMutableDictionary()
-        userInfo[NSLocalizedFailureReasonErrorKey] = description
-        userInfo[NSValidationObjectErrorKey] = self
-        return NSError(domain: "Domain", code: NSManagedObjectValidationError, userInfo: userInfo as [NSObject : AnyObject])
     }
 }
