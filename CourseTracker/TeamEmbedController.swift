@@ -8,23 +8,28 @@
 
 import UIKit
 
-let cardInset = CGFloat(15)
-let cardWidth = CGFloat(300)
+let cardSpacer = CGFloat(15)
+let cardWidth = CGFloat(250)
 
 class TeamEmbedController : UIViewController {
     
-    @IBOutlet weak var teamActionsBackground: UIView!
-    @IBOutlet var teamActions: [UIButton]!
+
+    @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var scrollView: UIScrollView!
     var teams = [Team]()
     var controllers = [TeamCardController]()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        teamActionsBackground.backgroundColor = secondaryColor()
-        for button in teamActions {
-            button.setTitleColor(primaryColor(), forState: .Normal)
+        toolbar.transform = CGAffineTransformRotate(CGAffineTransformIdentity, CGFloat(M_PI/2))
+        for view in toolbar.subviews as! [UIView] {
+            if !view.isKindOfClass(UIImageView.classForCoder()) {
+                view.transform = CGAffineTransformRotate(CGAffineTransformIdentity, CGFloat(-M_PI/2))
+            }
         }
+        toolbar.transform = CGAffineTransformConcat(toolbar.transform, CGAffineTransformMakeTranslation(-toolbar.frame.origin.x, -toolbar.frame.origin.y))
+        
+        toolbar.barTintColor = secondaryColor()
+        toolbar.tintColor = primaryColor()
         view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
         NSNotificationCenter.defaultCenter().addObserverForName("NewTeamAdded", object: nil, queue: nil) { (_) -> Void in
@@ -53,17 +58,18 @@ class TeamEmbedController : UIViewController {
             let teamCardController = storyboard?.instantiateViewControllerWithIdentifier("TeamCardController") as! TeamCardController
             teamCardController.team = team
             teamCardController.view.frame = CGRectMake(
-                cardInset + count * cardInset * 2 + cardWidth * count,
-                cardInset,
+                (count + 1) * cardSpacer * 2 + cardWidth * count,
+                cardSpacer,
                 cardWidth,
-                view.frame.size.height - (cardInset * 2)
+                view.frame.size.height - (cardSpacer * 2)
             )
             addChildViewController(teamCardController)
             scrollView.addSubview(teamCardController.view)
+            teamCardController.view.autoresizingMask = UIViewAutoresizing.None
             controllers += [teamCardController]
             count++
         }
-        scrollView.contentSize = CGSizeMake(count * cardInset * 2 + cardWidth * count, view.frame.size.height)
+        scrollView.contentSize = CGSizeMake((count + 1) * cardSpacer * 2 + cardWidth * count, view.frame.size.height)
     }
     
     

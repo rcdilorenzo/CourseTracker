@@ -33,6 +33,7 @@ class NewTeamController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func cancel(sender: AnyObject) {
         context.undoTransaction()
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func done(sender: AnyObject) {

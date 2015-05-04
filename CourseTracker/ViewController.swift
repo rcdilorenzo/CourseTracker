@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.tintColor = primaryColor()
         if let course = Course.current() {
             self.navigationItem.title = course.name
         } else {
