@@ -13,8 +13,8 @@ import UIKit
 
 public class Team: NSManagedObject {
 
-    @NSManaged var color: UIColor?
-    @NSManaged var name: String?
+    @NSManaged public var color: UIColor?
+    @NSManaged public var name: String?
     @NSManaged var course: Course
     @NSManaged var runners: NSSet
     
@@ -27,6 +27,10 @@ public class Team: NSManagedObject {
         self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
         self.name = name
         self.color = color
+    }
+    
+    public class func byName(name: String) -> Team? {
+        return findFirstByAttribute("name", value: name)
     }
     
     public func runs() -> [Run] {

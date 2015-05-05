@@ -14,6 +14,10 @@ import CourseTracker
 class TeamTests: XCTestCase {
     let context: NSManagedObjectContext = inMemoryContext()
     
+    override func setUp() {
+        context.reset()
+    }
+    
     func testGettingRuns() {
         let team = Team(name: "My Team", color: UIColor.blackColor())
         
@@ -25,6 +29,14 @@ class TeamTests: XCTestCase {
         let thirdRun = Run(runners: NSSet(array: [secondRunner]))
         
         XCTAssertEqual(team.runs().count, 3)
+    }
+    
+    func testGettingByName() {
+        let name = "One Team"
+        let originalTeam = Team(name: name, color: UIColor.blackColor())
+        let fetchedTeam = Team.byName(name)!
+        
+        XCTAssertEqual(originalTeam, fetchedTeam)
     }
     
 }

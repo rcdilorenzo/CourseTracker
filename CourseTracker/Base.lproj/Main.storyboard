@@ -43,7 +43,9 @@
                             <constraint firstItem="Hfu-NG-q6d" firstAttribute="top" secondItem="QNw-Jc-Als" secondAttribute="bottom" id="uvJ-Rg-0kM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Course Tracker" id="tfF-lP-izs"/>
+                    <navigationItem key="navigationItem" title="Course Tracker" id="tfF-lP-izs">
+                        <barButtonItem key="rightBarButtonItem" title="New Run" id="3Iw-DU-HM9"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

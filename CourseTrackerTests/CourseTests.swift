@@ -14,6 +14,10 @@ import CourseTracker
 class CourseTests: XCTestCase {
     let context: NSManagedObjectContext = inMemoryContext()
     
+    override func setUp() {
+        context.reset()
+    }
+    
     func testCurrentCourse() {
         let course = Course(name: "Obstacle Day 1", details: nil)
         course.setCurrent()
