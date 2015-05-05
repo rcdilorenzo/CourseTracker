@@ -11,11 +11,15 @@ import CoreData
 
 public class Runner: NSManagedObject {
 
-    @NSManaged var age: NSNumber
-    @NSManaged var firstName: String
-    @NSManaged var lastName: String
-    @NSManaged var team: Team
+    @NSManaged var age: NSNumber?
+    @NSManaged var firstName: String?
+    @NSManaged var lastName: String?
+    @NSManaged var team: Team?
     @NSManaged var runs: NSSet
+    
+    public convenience init() {
+        self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+    }
     
     public convenience init(firstName: String!, lastName: String!, age: Int, team: Team) {
         self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
@@ -28,6 +32,24 @@ public class Runner: NSManagedObject {
     public func addRun(run: Run) {
         let _runs = mutableSetValueForKey("runs")
         _runs.addObject(run)
+    }
+    
+    public func name() -> String {
+        return "\(firstName!) \(lastName!)"
+    }
+    
+    public func validate(completion: (Bool, String?) -> ()) {
+        if firstName == nil || firstName!.isEmpty {
+            completion(false, "First name is required.")
+        } else if lastName == nil || lastName!.isEmpty {
+            completion(false, "Last name is required.")
+        } else if age == nil {
+            completion(false, "Age is required.")
+        } else if team == nil {
+            completion(false, "Team is required.")
+        } else {
+            completion(true, nil)
+        }
     }
 
 }

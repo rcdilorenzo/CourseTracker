@@ -15,6 +15,7 @@ class NewTeamController: UITableViewController, UITextFieldDelegate {
     let context = Team.defaultContext()
     @IBOutlet weak var selectedColor: UIView!
     @IBOutlet var colorViews: [UIView]!
+    @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ class NewTeamController: UITableViewController, UITextFieldDelegate {
             presentViewController(alert, animated: true, completion: nil)
         } else if context.save() {
             dismissViewControllerAnimated(true, completion: {
-                NSNotificationCenter.defaultCenter().postNotificationName("NewTeamAdded", object: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("TeamsChanged", object: nil)
             })
         }
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C1C279D1AF93D8B00E5E85C /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C1C279C1AF93D8B00E5E85C /* FontAwesome.otf */; };
 		1C4B020D1AF7A678009F8BBD /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */; };
 		1C85ABB81AEF271A00F10114 /* Dollar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C85ABB71AEF271A00F10114 /* Dollar.framework */; };
 		1C85ABBC1AEF2B9400F10114 /* TeamRankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C85ABBB1AEF2B9400F10114 /* TeamRankCell.swift */; };
@@ -28,6 +29,10 @@
 		1CD102921AEE8CBB00AC6122 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1028E1AEE8CBB00AC6122 /* Team.swift */; };
 		1CD1029A1AEE97D100AC6122 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD102991AEE97D100AC6122 /* TestHelper.swift */; };
 		1CD1029F1AEE996200AC6122 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD1029E1AEE996200AC6122 /* Database.swift */; };
+		1CE3B85B1AF857D300258BCE /* RunnerTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3B85A1AF857D300258BCE /* RunnerTableController.swift */; };
+		1CE3B85D1AF857EC00258BCE /* NewRunnerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3B85C1AF857EC00258BCE /* NewRunnerController.swift */; };
+		1CF59F711AF91C2400D8600C /* FontAwesomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CF59F701AF91C2400D8600C /* FontAwesomeKit.framework */; };
+		487532B3F3A02B71F89B64D7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383EB0EC696B9C37FB9F74A7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C1C279C1AF93D8B00E5E85C /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		1C85ABB71AEF271A00F10114 /* Dollar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dollar.framework; path = ../Carthage/Build/iOS/Dollar.framework; sourceTree = "<group>"; };
 		1C85ABBB1AEF2B9400F10114 /* TeamRankCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamRankCell.swift; sourceTree = "<group>"; };
@@ -66,6 +72,13 @@
 		1CD1028E1AEE8CBB00AC6122 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		1CD102991AEE97D100AC6122 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		1CD1029E1AEE996200AC6122 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		1CE3B85A1AF857D300258BCE /* RunnerTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunnerTableController.swift; sourceTree = "<group>"; };
+		1CE3B85C1AF857EC00258BCE /* NewRunnerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRunnerController.swift; sourceTree = "<group>"; };
+		1CE3B8631AF90E7F00258BCE /* FontAwesomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesomeKit.framework; path = "Pods/../build/Debug-iphoneos/Pods/FontAwesomeKit.framework"; sourceTree = "<group>"; };
+		1CF59F701AF91C2400D8600C /* FontAwesomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesomeKit.framework; path = "Pods/../build/Debug-iphoneos/Pods/FontAwesomeKit.framework"; sourceTree = "<group>"; };
+		2E39D73CE4479BC91F949562 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		383EB0EC696B9C37FB9F74A7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		648520599C910739A479148D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +86,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CF59F711AF91C2400D8600C /* FontAwesomeKit.framework in Frameworks */,
 				1C85ABB81AEF271A00F10114 /* Dollar.framework in Frameworks */,
+				487532B3F3A02B71F89B64D7 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +102,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D5CA08410BD6A2E4B9AFFCF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				648520599C910739A479148D /* Pods.debug.xcconfig */,
+				2E39D73CE4479BC91F949562 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		1CC550B51AEF1BBA0003EA8B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +125,8 @@
 				1CD1025C1AEE7E9500AC6122 /* CourseTracker */,
 				1CD102751AEE7E9500AC6122 /* CourseTrackerTests */,
 				1CD1025B1AEE7E9500AC6122 /* Products */,
+				0D5CA08410BD6A2E4B9AFFCF /* Pods */,
+				22790DB1554003521B37843C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,6 +159,7 @@
 		1CD1025D1AEE7E9500AC6122 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1C1C279C1AF93D8B00E5E85C /* FontAwesome.otf */,
 				1C85ABB71AEF271A00F10114 /* Dollar.framework */,
 				1CD1025E1AEE7E9500AC6122 /* Info.plist */,
 			);
@@ -173,13 +200,33 @@
 		1CD102931AEE909700AC6122 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1C85ABBD1AEF2D9200F10114 /* NewCourseController.swift */,
+				1CCC27CE1AF00B5000CD8E06 /* NewTeamController.swift */,
+				1CE3B85A1AF857D300258BCE /* RunnerTableController.swift */,
+				1CE3B85C1AF857EC00258BCE /* NewRunnerController.swift */,
+				1CE3B8591AF857A100258BCE /* Main Screen */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1CE3B8591AF857A100258BCE /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
 				1CD102641AEE7E9500AC6122 /* ViewController.swift */,
 				1CC550B31AEEEC220003EA8B /* TeamEmbedController.swift */,
 				1CC550B61AEF1BCA0003EA8B /* TeamCardController.swift */,
-				1C85ABBD1AEF2D9200F10114 /* NewCourseController.swift */,
-				1CCC27CE1AF00B5000CD8E06 /* NewTeamController.swift */,
 			);
-			name = Controllers;
+			name = "Main Screen";
+			sourceTree = "<group>";
+		};
+		22790DB1554003521B37843C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CF59F701AF91C2400D8600C /* FontAwesomeKit.framework */,
+				1CE3B8631AF90E7F00258BCE /* FontAwesomeKit.framework */,
+				383EB0EC696B9C37FB9F74A7 /* Pods.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,10 +236,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CD1027C1AEE7E9500AC6122 /* Build configuration list for PBXNativeTarget "CourseTracker" */;
 			buildPhases = (
+				5C3FFBC4913434D173BE4798 /* Check Pods Manifest.lock */,
 				1CD102561AEE7E9500AC6122 /* Sources */,
 				1CD102571AEE7E9500AC6122 /* Frameworks */,
 				1CD102581AEE7E9500AC6122 /* Resources */,
 				1C85ABBA1AEF28F000F10114 /* ShellScript */,
+				CF6EAB881B23E40C9B6B614A /* Copy Pods Resources */,
+				F0E0D60DAE359FEA4CC183D2 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -265,6 +315,7 @@
 			files = (
 				1CD102681AEE7E9500AC6122 /* Main.storyboard in Resources */,
 				1CD1026D1AEE7E9500AC6122 /* LaunchScreen.xib in Resources */,
+				1C1C279D1AF93D8B00E5E85C /* FontAwesome.otf in Resources */,
 				1CD1026A1AEE7E9500AC6122 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +344,51 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
+		5C3FFBC4913434D173BE4798 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CF6EAB881B23E40C9B6B614A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0E0D60DAE359FEA4CC183D2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -305,8 +401,10 @@
 				1C85ABBC1AEF2B9400F10114 /* TeamRankCell.swift in Sources */,
 				1CD102651AEE7E9500AC6122 /* ViewController.swift in Sources */,
 				1CD102921AEE8CBB00AC6122 /* Team.swift in Sources */,
+				1CE3B85D1AF857EC00258BCE /* NewRunnerController.swift in Sources */,
 				1CC550B71AEF1BCA0003EA8B /* TeamCardController.swift in Sources */,
 				1CD102601AEE7E9500AC6122 /* AppDelegate.swift in Sources */,
+				1CE3B85B1AF857D300258BCE /* RunnerTableController.swift in Sources */,
 				1C4B020D1AF7A678009F8BBD /* ColorPalette.swift in Sources */,
 				1CCC27CF1AF00B5000CD8E06 /* NewTeamController.swift in Sources */,
 				1C85ABBE1AEF2D9200F10114 /* NewCourseController.swift in Sources */,
@@ -397,6 +495,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -435,6 +534,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -442,29 +542,35 @@
 		};
 		1CD1027D1AEE7E9500AC6122 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 648520599C910739A479148D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
 				);
 				INFOPLIST_FILE = CourseTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
 		1CD1027E1AEE7E9500AC6122 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E39D73CE4479BC91F949562 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
 				);
 				INFOPLIST_FILE = CourseTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

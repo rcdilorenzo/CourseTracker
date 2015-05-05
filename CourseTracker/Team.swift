@@ -29,6 +29,13 @@ public class Team: NSManagedObject {
         self.color = color
     }
     
+    public class func forRunner(runner: Runner) -> Team {
+        // TODO: re-evaluate this algorithm
+        let request = fetchRequest()
+        request.fetchLimit = 1
+        return defaultContext().executeFetchRequest(request)!.first as! Team
+    }
+    
     public class func byName(name: String) -> Team? {
         return findFirstByAttribute("name", value: name)
     }

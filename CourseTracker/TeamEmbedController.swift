@@ -32,7 +32,7 @@ class TeamEmbedController : UIViewController {
         toolbar.tintColor = primaryColor()
         view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
-        NSNotificationCenter.defaultCenter().addObserverForName("NewTeamAdded", object: nil, queue: nil) { (_) -> Void in
+        NSNotificationCenter.defaultCenter().addObserverForName("TeamsChanged", object: nil, queue: nil) { (_) -> Void in
             self.refreshData()
         }
     }

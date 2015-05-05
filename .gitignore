@@ -2,3 +2,4 @@
 *.xccheckout
 */**/xcdebugger/
 Carthage/
+Pods/
