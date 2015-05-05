@@ -56,16 +56,16 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section < fetchedResultsController!.sections!.count {
+        if isLastSection(section) {
+            return 1
+        } else {
             let section = fetchedResultsController?.sections![section] as! NSFetchedResultsSectionInfo
             return section.numberOfObjects
-        } else {
-            return 1
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if isLastCell(indexPath) {
+        if isLastSection(indexPath.section) {
             let cell = tableView.dequeueReusableCellWithIdentifier(alternateCellID, forIndexPath: indexPath) as! UITableViewCell
             cell.textLabel!.attributedText = NSAttributedString(string: "New Runner", attributes: [
                 NSFontAttributeName: UIFont.boldSystemFontOfSize(16),
@@ -87,7 +87,7 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         searchController!.active = false
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if isLastCell(indexPath) {
+        if isLastSection(indexPath.section) {
             searchDelegate?.runnerSearchSelectedCreate(self)
         } else {
             let runner = fetchedResultsController!.objectAtIndexPath(indexPath) as! Runner
@@ -96,15 +96,16 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section < fetchedResultsController!.sections!.count {
+        if isLastSection(section) {
+            return nil
+        } else {
             let section = fetchedResultsController?.sections![section] as! NSFetchedResultsSectionInfo
             return section.name
         }
-        return nil
     }
     
-    func isLastCell(indexPath: NSIndexPath) -> Bool {
-        return indexPath.section == fetchedResultsController!.sections!.count
+    func isLastSection(section: Int) -> Bool {
+        return section == fetchedResultsController!.sections!.count
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
