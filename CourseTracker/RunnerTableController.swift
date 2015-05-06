@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import FontAwesomeKit
+import Dollar
 
 protocol RunnerSearchDelegate {
     func runnerSearch(searchController: RunnerTableController, didSelectRunner runner: Runner, fromCell cell: UITableViewCell)
@@ -18,6 +19,9 @@ protocol RunnerSearchDelegate {
 class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
     let cellID = "subtitle"
     let alternateCellID = "basic"
+    var showNewRunnerCell = true
+    var allowSelectionForRun = false
+    var selectedRunners = [Runner]()
     var searchDelegate: RunnerSearchDelegate?
     var fetchedResultsController: NSFetchedResultsController?
     var searchController: UISearchController?
@@ -43,7 +47,9 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
             navigation.navigationBar.titleTextAttributes = [
                 NSForegroundColorAttributeName: UIColor.whiteColor()
             ]
-            navigation.navigationBar.topItem!.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done")
+            if navigation.navigationBar.topItem!.rightBarButtonItem == nil {
+                navigation.navigationBar.topItem!.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done")
+            }
         }
     }
     
@@ -52,11 +58,11 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return fetchedResultsController!.sections!.count + 1
+        return showNewRunnerCell ? fetchedResultsController!.sections!.count + 1 : fetchedResultsController!.sections!.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isLastSection(section) {
+        if isNewRunnerCellSection(section) {
             return 1
         } else {
             let section = fetchedResultsController?.sections![section] as! NSFetchedResultsSectionInfo
@@ -65,7 +71,7 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if isLastSection(indexPath.section) {
+        if isNewRunnerCellSection(indexPath.section) {
             let cell = tableView.dequeueReusableCellWithIdentifier(alternateCellID, forIndexPath: indexPath) as! UITableViewCell
             cell.textLabel!.attributedText = NSAttributedString(string: "New Runner", attributes: [
                 NSFontAttributeName: UIFont.boldSystemFontOfSize(16),
@@ -78,6 +84,7 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! UITableViewCell
             let runner = fetchedResultsController!.objectAtIndexPath(indexPath) as! Runner
+            cell.accessoryType = contains(selectedRunners, runner) ? .Checkmark : .None
             cell.textLabel!.text = runner.name()
             cell.detailTextLabel!.text = "\(runner.age!) year old"
             return cell
@@ -87,8 +94,18 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         searchController!.active = false
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if isLastSection(indexPath.section) {
+        if isNewRunnerCellSection(indexPath.section) {
             searchDelegate?.runnerSearchSelectedCreate(self)
+        } else if allowSelectionForRun {
+            let runner = fetchedResultsController!.objectAtIndexPath(indexPath) as! Runner
+            let cell = tableView.cellForRowAtIndexPath(indexPath)!
+            cell.accessoryType = .Checkmark
+            if contains(selectedRunners, runner) {
+                selectedRunners = $.pull(selectedRunners, values: runner)
+            } else {
+                selectedRunners += [runner]
+            }
+            refreshData(searchController!.searchBar.text)
         } else {
             let runner = fetchedResultsController!.objectAtIndexPath(indexPath) as! Runner
             searchDelegate?.runnerSearch(self, didSelectRunner: runner, fromCell: tableView.cellForRowAtIndexPath(indexPath)!)
@@ -96,7 +113,7 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if isLastSection(section) {
+        if isNewRunnerCellSection(section) {
             return nil
         } else {
             let section = fetchedResultsController?.sections![section] as! NSFetchedResultsSectionInfo
@@ -104,8 +121,8 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
         }
     }
     
-    func isLastSection(section: Int) -> Bool {
-        return section == fetchedResultsController!.sections!.count
+    func isNewRunnerCellSection(section: Int) -> Bool {
+        return showNewRunnerCell && section == fetchedResultsController!.sections!.count
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -133,8 +150,12 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
     
     func refreshData(searchText: String) {
         let fetchRequest = Runner.fetchRequest()
-        if !searchText.isEmpty {
-            fetchRequest.predicate = NSPredicate(format: "(firstName contains[cd] %@) OR (lastName contains[cd] %@)", searchText, searchText)
+        let filterPredicate = NSPredicate(format: "(firstName contains[cd] %@) OR (lastName contains[cd] %@)", searchText, searchText)
+        if selectedRunners.isEmpty {
+            fetchRequest.predicate = searchText.isEmpty ? nil : filterPredicate
+        } else {
+            let teamPredicate = NSPredicate(format: "team = %@", selectedRunners.first!.team!)
+            fetchRequest.predicate = searchText.isEmpty ? teamPredicate : NSCompoundPredicate(type: .AndPredicateType, subpredicates: [filterPredicate, teamPredicate])
         }
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true)]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Runner.defaultContext(), sectionNameKeyPath: "team.name", cacheName: nil)
