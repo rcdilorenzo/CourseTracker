@@ -13,6 +13,14 @@ class ViewController: UIViewController, RunnerSearchDelegate, ModalPresentContro
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let navigation = navigationController {
+            navigation.navigationBar.barTintColor = secondaryColor()
+            navigation.navigationBar.tintColor = primaryColor()
+            navigation.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.whiteColor()
+            ]
+            navigation.navigationBar.barStyle = UIBarStyle.BlackTranslucent
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,7 +47,7 @@ class ViewController: UIViewController, RunnerSearchDelegate, ModalPresentContro
         let runnerController = storyboard!.instantiateViewControllerWithIdentifier("runnerController") as! RunnerTableController
         runnerController.searchDelegate = self
         let navigation = UINavigationController(rootViewController: runnerController)
-        navigation.preferredContentSize = CGSizeMake(400, 650)
+        navigation.preferredContentSize = CGSizeMake(400, 800)
         navigation.modalPresentationStyle = UIModalPresentationStyle.FormSheet
         navigationController?.presentViewController(navigation, animated: true, completion: nil)
     }
