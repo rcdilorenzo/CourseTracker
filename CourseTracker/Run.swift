@@ -20,6 +20,17 @@ public class Run: NSManagedObject {
         self.runners = runners
     }
 
+    lazy var timeFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.NoStyle
+        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        return formatter
+    }()
+
+    func timeDescription() -> String {
+        return timeFormatter.stringFromDate(start!)
+    }
+
     public func runnerNames() -> String {
         let sortedRunners = runners.sortedArrayUsingDescriptors([NSSortDescriptor(key: "firstName", ascending: true)]) as! [Runner]
         switch runners.count {
