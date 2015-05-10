@@ -34,6 +34,10 @@ public class Runner: NSManagedObject {
         _runs.addObject(run)
     }
     
+    public func nameAbbrev() -> String {
+        return "\(firstName!) \((lastName! as NSString).substringToIndex(1))"
+    }
+
     public func name() -> String {
         return "\(firstName!) \(lastName!)"
     }

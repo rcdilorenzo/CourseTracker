@@ -19,4 +19,30 @@ public class Run: NSManagedObject {
         self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
         self.runners = runners
     }
+
+    public func runnerNames() -> String {
+        let sortedRunners = runners.sortedArrayUsingDescriptors([NSSortDescriptor(key: "firstName", ascending: true)]) as! [Runner]
+        switch runners.count {
+        case 0:
+            return ""
+        case 1:
+            return sortedRunners.first!.name()
+        case 2:
+            return "\(sortedRunners[0].nameAbbrev()). and \(sortedRunners[1].nameAbbrev())."
+        default:
+            let namesMinusLast = (sortedRunners as NSArray).subarrayWithRange(NSMakeRange(0, sortedRunners.count-1)).map({ $0.nameAbbrev() })
+            return join(", ", namesMinusLast) + ", and \(sortedRunners.last!.nameAbbrev())"
+        }
+    }
+
+    func startRun() {
+        start = NSDate()
+        end = nil
+        timeInterval = 0
+    }
+
+    func stopRun() {
+        end = NSDate()
+        timeInterval = Double(end!.timeIntervalSinceDate(start!))
+    }
 }
