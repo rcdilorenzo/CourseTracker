@@ -10,6 +10,7 @@ import UIKit
 import XCTest
 import CoreData
 import CourseTracker
+import Dollar
 
 class TeamTests: XCTestCase {
     let context: NSManagedObjectContext = inMemoryContext()
@@ -39,4 +40,13 @@ class TeamTests: XCTestCase {
         XCTAssertEqual(originalTeam, fetchedTeam)
     }
     
+    func testAverageTeamAge() {
+        let team = Team(name: "My Team", color: UIColor.blackColor())
+        let ages = [12, 14, 6, 7]
+        for age in ages {
+            runnerWithAge(age, team)
+        }
+        XCTAssertEqual(team.averageAge(), Double($.reduce(ages, initial: 0, combine: { $0 + $1 })) / Double(ages.count))
+    }
+
 }

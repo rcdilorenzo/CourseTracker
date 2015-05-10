@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191DE1822D5E40AA632662FA /* Pods_CourseTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12DD99568232CAE902987917 /* Pods_CourseTrackerTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1C0957CF1AFFEAB7004B13A0 /* CourseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0957CE1AFFEAB7004B13A0 /* CourseTests.swift */; };
 		1C0957D11AFFF4FC004B13A0 /* RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0957D01AFFF4FC004B13A0 /* RunTests.swift */; };
+		1C0957D21B000171004B13A0 /* Dollar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C85ABB71AEF271A00F10114 /* Dollar.framework */; };
 		1C1C279D1AF93D8B00E5E85C /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C1C279C1AF93D8B00E5E85C /* FontAwesome.otf */; };
 		1C1C279F1AF96D0C00E5E85C /* NewRunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1C279E1AF96D0C00E5E85C /* NewRunController.swift */; };
 		1C4B020D1AF7A678009F8BBD /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */; };
@@ -52,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12DD99568232CAE902987917 /* Pods_CourseTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C0957CE1AFFEAB7004B13A0 /* CourseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTests.swift; sourceTree = "<group>"; };
 		1C0957D01AFFF4FC004B13A0 /* RunTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunTests.swift; sourceTree = "<group>"; };
 		1C1C279C1AF93D8B00E5E85C /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
@@ -89,7 +92,9 @@
 		1CF59F701AF91C2400D8600C /* FontAwesomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesomeKit.framework; path = "Pods/../build/Debug-iphoneos/Pods/FontAwesomeKit.framework"; sourceTree = "<group>"; };
 		2E39D73CE4479BC91F949562 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		383EB0EC696B9C37FB9F74A7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53E2B33FDF79A12538775ED9 /* Pods-CourseTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseTrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CourseTrackerTests/Pods-CourseTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		648520599C910739A479148D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D267F669E3EF654164CAF79A /* Pods-CourseTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseTrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CourseTrackerTests/Pods-CourseTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191DE1822D5E40AA632662FA /* Pods_CourseTrackerTests.framework in Frameworks */,
+				1C0957D21B000171004B13A0 /* Dollar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +125,8 @@
 			children = (
 				648520599C910739A479148D /* Pods.debug.xcconfig */,
 				2E39D73CE4479BC91F949562 /* Pods.release.xcconfig */,
+				D267F669E3EF654164CAF79A /* Pods-CourseTrackerTests.debug.xcconfig */,
+				53E2B33FDF79A12538775ED9 /* Pods-CourseTrackerTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -241,6 +250,7 @@
 				1CF59F701AF91C2400D8600C /* FontAwesomeKit.framework */,
 				1CE3B8631AF90E7F00258BCE /* FontAwesomeKit.framework */,
 				383EB0EC696B9C37FB9F74A7 /* Pods.framework */,
+				12DD99568232CAE902987917 /* Pods_CourseTrackerTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -273,9 +283,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CD1027F1AEE7E9500AC6122 /* Build configuration list for PBXNativeTarget "CourseTrackerTests" */;
 			buildPhases = (
+				DED5BF388EECEAB691D4D4E4 /* Check Pods Manifest.lock */,
 				1CD1026E1AEE7E9500AC6122 /* Sources */,
 				1CD1026F1AEE7E9500AC6122 /* Frameworks */,
 				1CD102701AEE7E9500AC6122 /* Resources */,
+				6C33FD0F48E61DF4ED394722 /* Embed Pods Frameworks */,
+				D33BDBB55895DB3621DF8224 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -375,6 +388,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		6C33FD0F48E61DF4ED394722 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CourseTrackerTests/Pods-CourseTrackerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CF6EAB881B23E40C9B6B614A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,6 +416,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D33BDBB55895DB3621DF8224 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CourseTrackerTests/Pods-CourseTrackerTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DED5BF388EECEAB691D4D4E4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F0E0D60DAE359FEA4CC183D2 /* Embed Pods Frameworks */ = {
@@ -598,11 +656,13 @@
 		};
 		1CD102801AEE7E9500AC6122 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D267F669E3EF654164CAF79A /* Pods-CourseTrackerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -617,11 +677,13 @@
 		};
 		1CD102811AEE7E9500AC6122 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53E2B33FDF79A12538775ED9 /* Pods-CourseTrackerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = CourseTrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

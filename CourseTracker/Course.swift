@@ -37,5 +37,14 @@ public class Course: NSManagedObject {
             return nil
         }
     }
+    
+    public func averageAge() -> Double {
+        let request = Runner.fetchRequest()
+        request.predicate = NSPredicate(format: "(team in %@) AND (age > 0)", self.teams)
+        request.propertiesToFetch = ["age"]
+        let runners = managedObjectContext!.executeFetchRequest(request) as! [Runner]
+        let ages = runners.map { $0.age!.doubleValue }
+        return average(ages)
+    }
 
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Dollar
 
 func formatTimeInSec(totalSeconds: NSTimeInterval) -> String {
     let milliseconds = NSNumber(double: round((totalSeconds - Double(trunc(totalSeconds))) * 1000))
@@ -23,4 +24,8 @@ func padNumber(number: AnyObject, digits: Int) -> String {
         string = "0" + string
     }
     return string
+}
+
+func average(array: [Double]) -> Double {
+    return $.reduce(array, initial: 0, combine: { $0 + $1 }) / Double(array.count)
 }

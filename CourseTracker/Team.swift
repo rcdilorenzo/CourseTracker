@@ -15,7 +15,7 @@ public class Team: NSManagedObject {
 
     @NSManaged public var color: UIColor?
     @NSManaged public var name: String?
-    @NSManaged var course: Course
+    @NSManaged public var course: Course
     @NSManaged var runners: NSSet
     
     public convenience init(course: Course) {
@@ -34,6 +34,11 @@ public class Team: NSManagedObject {
         let request = fetchRequest()
         request.fetchLimit = 1
         return defaultContext().executeFetchRequest(request)!.first as! Team
+    }
+    
+    public func averageAge() -> Double {
+        let ages = (runners.allObjects as! [Runner]).map({ $0.age!.doubleValue })
+        return average(ages)
     }
     
     public class func byName(name: String) -> Team? {

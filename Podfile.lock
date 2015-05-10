@@ -2,11 +2,14 @@ PODS:
   - FontAwesomeKit/Core (2.2.0)
   - FontAwesomeKit/FontAwesome (2.2.0):
     - FontAwesomeKit/Core
+  - MBFaker (0.1.2)
 
 DEPENDENCIES:
   - FontAwesomeKit/FontAwesome
+  - MBFaker
 
 SPEC CHECKSUMS:
   FontAwesomeKit: 025fd4dd1017fe4e3f8d47b03e024deedbb33cd4
+  MBFaker: 856baf3a7153a474506114b1694c57b3bbeafbda
 
 COCOAPODS: 0.37.0

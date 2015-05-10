@@ -9,6 +9,7 @@
 import UIKit
 import CourseTracker
 import CoreData
+import MBFaker
 
 func appDelegate() -> CourseTracker.AppDelegate {
     return UIApplication.sharedApplication().delegate as! CourseTracker.AppDelegate
@@ -21,4 +22,8 @@ func setInMemoryStore() {
 func inMemoryContext() -> NSManagedObjectContext {
     setInMemoryStore()
     return appDelegate().managedObjectContext!
+}
+
+func runnerWithAge(age: Int, team: Team) -> Runner {
+    return Runner(firstName: MBFakerName.firstName(), lastName: MBFakerName.firstName(), age: age, team: team)
 }
