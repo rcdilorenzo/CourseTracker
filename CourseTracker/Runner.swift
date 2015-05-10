@@ -29,6 +29,22 @@ public class Runner: NSManagedObject {
         self.team = team
     }
     
+    public func fastestRun() -> Run? {
+        let request = Run.fetchRequest()
+        request.predicate = NSPredicate(format: "(SELF in %@) AND (timeInterval > 0)", self.runs)
+        request.sortDescriptors = [NSSortDescriptor(key: "timeInterval", ascending: true)]
+        request.fetchLimit = 1
+        return managedObjectContext!.executeFetchRequest(request)?.first as? Run
+    }
+    
+    public func fastestRunDescription() -> String {
+        if let run = fastestRun() {
+            return "Best Time: \(formatTimeInSec(run.timeInterval))"
+        } else {
+            return "Best Time: none"
+        }
+    }
+    
     public func addRun(run: Run) {
         let _runs = mutableSetValueForKey("runs")
         _runs.addObject(run)
@@ -37,7 +53,7 @@ public class Runner: NSManagedObject {
     public func nameAbbrev() -> String {
         return "\(firstName!) \((lastName! as NSString).substringToIndex(1))"
     }
-
+    
     public func name() -> String {
         return "\(firstName!) \(lastName!)"
     }

@@ -19,7 +19,7 @@ class TeamCardController: UIViewController, UITableViewDataSource, UITableViewDe
     var runs: [Run] = []
     var team: Team? {
         didSet {
-            self.runs = team!.runs()
+            self.runs = (team!.runs() as NSArray).sortedArrayUsingDescriptors([NSSortDescriptor(key: "timeInterval", ascending: true)]) as! [Run]
         }
     }
     
@@ -38,12 +38,16 @@ class TeamCardController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return runs.count
+        return min(runs.count, 10)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! TeamRankCell
         let run = runs[indexPath.row]
+        let runners = run.runners.allObjects as! [Runner]
+        cell.titleLabel.text = formatTimeInSec(run.timeInterval)
+        cell.subtitleLabel.text = run.runnerNames()
+        cell.detailLabel.text = run.timeDescription()
         return cell
     }
 }

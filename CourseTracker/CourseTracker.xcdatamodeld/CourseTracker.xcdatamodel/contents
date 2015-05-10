@@ -8,6 +8,7 @@
     <entity name="Run" representedClassName="CourseTracker.Run" syncable="YES">
         <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeInterval" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="runners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Runner" inverseName="runs" inverseEntity="Runner" syncable="YES"/>
     </entity>
     <entity name="Runner" representedClassName="CourseTracker.Runner" syncable="YES">
@@ -25,7 +26,7 @@
     </entity>
     <elements>
         <element name="Course" positionX="-90" positionY="-108" width="128" height="88"/>
-        <element name="Run" positionX="358" positionY="189" width="128" height="88"/>
+        <element name="Run" positionX="358" positionY="189" width="128" height="105"/>
         <element name="Runner" positionX="106" positionY="180" width="128" height="118"/>
         <element name="Team" positionX="97" positionY="-9" width="128" height="103"/>
     </elements>

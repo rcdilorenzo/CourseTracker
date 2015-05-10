@@ -41,7 +41,9 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
         definesPresentationContext = true
         
         if let navigation = navigationController {
-            navigation.navigationBar.topItem?.title = "Runners"
+            if navigation.navigationBar.topItem!.title == nil {
+                navigation.navigationBar.topItem?.title = "Runners"
+            }
             navigation.navigationBar.barTintColor = secondaryColor()
             navigation.navigationBar.tintColor = primaryColor()
             navigation.navigationBar.titleTextAttributes = [
@@ -85,8 +87,8 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! UITableViewCell
             let runner = fetchedResultsController!.objectAtIndexPath(indexPath) as! Runner
             cell.accessoryType = contains(selectedRunners, runner) ? .Checkmark : .None
-            cell.textLabel!.text = runner.name()
-            cell.detailTextLabel!.text = "\(runner.age!) year old"
+            cell.textLabel!.text = "\(runner.name()) (\(runner.age!))"
+            cell.detailTextLabel!.text = runner.fastestRunDescription()
             return cell
         }
     }
@@ -105,6 +107,7 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
             } else {
                 selectedRunners += [runner]
             }
+            searchDelegate?.runnerSearch(self, didSelectRunner: runner, fromCell: tableView.cellForRowAtIndexPath(indexPath)!)
             refreshData(searchController!.searchBar.text)
         } else {
             let runner = fetchedResultsController!.objectAtIndexPath(indexPath) as! Runner
