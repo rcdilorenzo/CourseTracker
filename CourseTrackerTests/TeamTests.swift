@@ -25,9 +25,9 @@ class TeamTests: XCTestCase {
         let firstRunner = Runner(firstName: "John", lastName: "Doe", age: 13, team: team)
         let secondRunner = Runner(firstName: "Jane", lastName: "Doe", age: 11, team: team)
         
-        let firstRun = Run(runners: NSSet(array: [firstRunner, secondRunner]))
-        let secondRun = Run(runners: NSSet(array: [secondRunner, firstRunner]))
-        let thirdRun = Run(runners: NSSet(array: [secondRunner]))
+        let firstRun = Run(runners: [firstRunner, secondRunner])
+        let secondRun = Run(runners: [secondRunner, firstRunner])
+        let thirdRun = Run(runners: [secondRunner])
         
         XCTAssertEqual(team.runs().count, 3)
     }

@@ -16,9 +16,9 @@ public class Run: NSManagedObject {
     @NSManaged var runners: NSSet
     @NSManaged var timeInterval: Double
 
-    public convenience init(runners: NSSet) {
+    public convenience init(runners: [Runner]) {
         self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
-        self.runners = runners
+        self.runners = NSSet(array: runners)
     }
     
     public convenience init(timeInterval: NSTimeInterval, runner: Runner) {

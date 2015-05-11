@@ -28,17 +28,17 @@ class RunTests: XCTestCase {
     }
     
     func testGettingSingleRunnerName() {
-        let run = Run(runners: NSSet(object: runner1!))
+        let run = Run(runners: [runner1!])
         XCTAssertEqual(run.runnerNames(), "John Doe")
     }
     
     func testGettingTwoRunnerNames() {
-        let run = Run(runners: NSSet(objects: runner2!, runner1!))
+        let run = Run(runners: [runner2!, runner1!])
         XCTAssertEqual(run.runnerNames(), "John D. and Rick J.")
     }
     
     func testGettingManyRunnerNames() {
-        let run = Run(runners: NSSet(objects: runner1!, runner2!, runner3!))
+        let run = Run(runners: [runner1!, runner2!, runner3!])
         XCTAssertEqual(run.runnerNames(), "Amy S, John D, and Rick J")
     }
     

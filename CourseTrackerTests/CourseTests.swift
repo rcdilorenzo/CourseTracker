@@ -36,7 +36,8 @@ class CourseTests: XCTestCase {
             allAges += ages
             count++
         }
-        XCTAssertEqual(course.averageAge(), Double($.reduce(allAges, initial: 0, combine: { $0 + $1 })) / Double(allAges.count))
+        let expectedAverage = Double($.reduce(allAges, initial: 0, combine: { $0 + $1 })) / Double(allAges.count)
+        XCTAssertEqual(course.averageAge(), expectedAverage)
     }
     
 }

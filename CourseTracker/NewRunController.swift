@@ -36,7 +36,7 @@ class NewRunController: UIViewController, UITableViewDataSource, UITableViewDele
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         context.beginTransaction()
-        run = Run(runners: NSSet(array: runners))
+        run = Run(runners: runners)
         stopButton.hidden = true
         durationLabel.hidden = true
     }
