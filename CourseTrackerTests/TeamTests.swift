@@ -48,5 +48,15 @@ class TeamTests: XCTestCase {
         }
         XCTAssertEqual(team.averageAge(), Double($.reduce(ages, initial: 0, combine: { $0 + $1 })) / Double(ages.count))
     }
+    
+    func testAutoAssignTeamRunnersCountIsFirstPriority() {
+        let course = Course(name: "Course", details: nil)
+        let team1 = teamWithAges([4, 8, 3, 6, 10], "1", course)
+        let team2 = teamWithAges([12, 10, 46], "2", course)
+        let team3 = teamWithAges([23, 11], "3", course)
+        let team4 = teamWithAges([4, 8, 3, 6, 11], "4", course)
+        let runner = Runner(age: 13)
+        XCTAssertEqual(Team.forRunner(runner, inCourse: course), team3)
+    }
 
 }

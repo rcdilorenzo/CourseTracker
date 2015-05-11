@@ -29,11 +29,12 @@ public class Team: NSManagedObject {
         self.color = color
     }
     
-    public class func forRunner(runner: Runner) -> Team {
-        // TODO: re-evaluate this algorithm
-        let request = fetchRequest()
-        request.fetchLimit = 1
-        return defaultContext().executeFetchRequest(request)!.first as! Team
+    public class func forRunner(runner: Runner, inCourse course: Course) -> Team {
+        let teams = course.teams.allObjects as! [Team]
+        let sortedTeams = teams.sorted { (team1, team2) -> Bool in
+            return team1.runners.count < team2.runners.count
+        }
+        return sortedTeams.first!
     }
     
     public func averageAge() -> Double {

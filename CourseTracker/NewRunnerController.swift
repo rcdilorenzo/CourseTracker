@@ -31,7 +31,7 @@ class NewRunnerController: UITableViewController, UIPickerViewDataSource, UIPick
         super.viewWillAppear(animated)
         context.beginTransaction()
         runner = Runner()
-        runner!.team = Team.forRunner(runner!)
+        runner!.team = Team.forRunner(runner!, inCourse: Course.current()!)
     }
     
     @IBAction func cancel(sender: AnyObject) {

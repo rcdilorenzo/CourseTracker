@@ -27,3 +27,12 @@ func inMemoryContext() -> NSManagedObjectContext {
 func runnerWithAge(age: Int, team: Team) -> Runner {
     return Runner(firstName: MBFakerName.firstName(), lastName: MBFakerName.firstName(), age: age, team: team)
 }
+
+func teamWithAges(ages: [Int], name: String, course: Course) -> Team {
+    let team = Team(name: name, color: UIColor.blackColor())
+    for age in ages {
+        runnerWithAge(age, team)
+    }
+    team.course = course
+    return team
+}

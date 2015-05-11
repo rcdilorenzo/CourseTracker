@@ -21,6 +21,11 @@ public class Runner: NSManagedObject {
         self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
     }
     
+    public convenience init(age: Int) {
+        self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
+        self.age = age
+    }
+    
     public convenience init(firstName: String!, lastName: String!, age: Int, team: Team) {
         self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
         self.firstName = firstName
