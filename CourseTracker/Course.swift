@@ -27,6 +27,7 @@ public class Course: NSManagedObject {
     public func setCurrent() -> Course {
         userDefaults.setValue(name, forKey: courseDefaultKey)
         userDefaults.synchronize()
+        managedObjectContext!.save()
         return self
     }
     
@@ -34,6 +35,11 @@ public class Course: NSManagedObject {
         if let name = userDefaults.valueForKey(courseDefaultKey) as? String {
             return findFirstByAttribute("name", value: name)
         } else {
+            let request = fetchRequest()
+            request.fetchLimit = 1
+            if let course = defaultContext().executeFetchRequest(request)?.first as? Course {
+                return course.setCurrent()
+            }
             return nil
         }
     }

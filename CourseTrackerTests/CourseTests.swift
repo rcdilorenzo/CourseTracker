@@ -19,13 +19,6 @@ class CourseTests: XCTestCase {
         context.reset()
     }
     
-    func testCurrentCourse() {
-        let course = Course(name: "Obstacle Day 1", details: nil)
-        course.setCurrent()
-        let retrievedCourse = Course.current()!
-        XCTAssertEqual(course, retrievedCourse)
-    }
-    
     func testAverageAgeCourse() {
         let course = Course(name: "Obstacle Day 1", details: nil)
         let teamsAges: [[Int]] = [[4, 7, 16, 9], [3, 4, 16, 32], [18, 13, 7, 12, 10]]
