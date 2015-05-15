@@ -11,7 +11,7 @@ import CoreData
 
 public class Runner: NSManagedObject {
 
-    @NSManaged var age: NSNumber?
+    @NSManaged public var age: NSNumber?
     @NSManaged var firstName: String?
     @NSManaged var lastName: String?
     @NSManaged var team: Team?

@@ -31,7 +31,6 @@ public class Team: NSManagedObject {
     
     public class func forRunner(runner: Runner, inCourse course: Course) -> Team {
         let teams = course.teams.allObjects as! [Team]
-        let courseAge = course.averageAge()
         var sortedTeams = teams.sorted { (team1, team2) -> Bool in
             return team1.runners.count < team2.runners.count
         }
@@ -40,7 +39,10 @@ public class Team: NSManagedObject {
             return team.runners.count == lowestRunnerCount
         }
         sortedTeams.sort { (team1, team2) -> Bool in
-            return abs(courseAge - team1.averageAge()) < abs(courseAge - team2.averageAge())
+            return team1.averageAge() < team2.averageAge()
+        }
+        if let age = runner.age {
+            return age.doubleValue > course.averageAge() ? sortedTeams.first! : sortedTeams.last!
         }
         return sortedTeams.first!
     }

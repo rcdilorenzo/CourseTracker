@@ -59,14 +59,26 @@ class TeamTests: XCTestCase {
         XCTAssertEqual(Team.forRunner(runner, inCourse: course), team3)
     }
     
-    func testAutoAssignTeamRunnersAgeIsSecondPriority() {
+    func testAutoAssignTeamWhenNewAgeMoreThanCourseAverage() {
         let course = Course(name: "Course", details: nil)
         let team1 = teamWithAges([10, 12], "1", course)
         let team2 = teamWithAges([4, 8], "2", course)
         let team3 = teamWithAges([23, 11], "3", course)
         let team4 = teamWithAges([4, 8, 3, 6, 11], "4", course)
-        let runner = Runner(age: 13)
-        XCTAssertEqual(Team.forRunner(runner, inCourse: course), team1)
+        let runner = Runner(age: 18)
+        assert(runner.age!.doubleValue > course.averageAge(), "Runner age must be greater than course average.")
+        XCTAssertEqual(Team.forRunner(runner, inCourse: course), team2, "Team with least average age should be assigned to runner with age greater than course average age.")
+    }
+    
+    func testAutoAssignTeamWhenNewAgeLessThanCourseAverage() {
+        let course = Course(name: "Course", details: nil)
+        let team1 = teamWithAges([10, 12], "1", course)
+        let team2 = teamWithAges([4, 8], "2", course)
+        let team3 = teamWithAges([23, 11], "3", course)
+        let team4 = teamWithAges([4, 8, 3, 6, 11], "4", course)
+        let runner = Runner(age: 6)
+        assert(runner.age!.doubleValue < course.averageAge(), "Runner age must be less than course average.")
+        XCTAssertEqual(Team.forRunner(runner, inCourse: course), team3, "Team with greatest average age should be assigned to runner with age less than course average age.")
     }
 
 }
