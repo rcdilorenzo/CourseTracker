@@ -59,16 +59,20 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func shouldShowNewRunnerCell() -> Bool {
+        return showNewRunnerCell && Course.current()!.teams.count > 0
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return showNewRunnerCell ? fetchedResultsController!.sections!.count + 1 : fetchedResultsController!.sections!.count
+        return shouldShowNewRunnerCell() ? fetchedResultsController!.sections!.count + 1 : fetchedResultsController!.sections!.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isNewRunnerCellSection(section) {
             return 1
         } else {
-            let section = fetchedResultsController?.sections![section] as! NSFetchedResultsSectionInfo
-            return section.numberOfObjects
+            let sectionInfo = fetchedResultsController?.sections![section] as! NSFetchedResultsSectionInfo
+            return sectionInfo.numberOfObjects
         }
     }
     
@@ -119,13 +123,13 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
         if isNewRunnerCellSection(section) {
             return nil
         } else {
-            let section = fetchedResultsController?.sections![section] as! NSFetchedResultsSectionInfo
-            return section.name
+            let sectionInfo = fetchedResultsController?.sections![section] as! NSFetchedResultsSectionInfo
+            return sectionInfo.name
         }
     }
     
     func isNewRunnerCellSection(section: Int) -> Bool {
-        return showNewRunnerCell && section == fetchedResultsController!.sections!.count
+        return shouldShowNewRunnerCell() && section == fetchedResultsController!.sections!.count
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -160,7 +164,7 @@ class RunnerTableController: UITableViewController, UISearchBarDelegate, UISearc
             let teamPredicate = NSPredicate(format: "team = %@", selectedRunners.first!.team!)
             fetchRequest.predicate = searchText.isEmpty ? teamPredicate : NSCompoundPredicate(type: .AndPredicateType, subpredicates: [filterPredicate, teamPredicate])
         }
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "team.name", ascending: true), NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true)]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Runner.defaultContext(), sectionNameKeyPath: "team.name", cacheName: nil)
         fetchedResultsController!.delegate = self
         fetchedResultsController!.performFetch(nil)
