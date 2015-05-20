@@ -11,6 +11,7 @@
 		1C0957CF1AFFEAB7004B13A0 /* CourseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0957CE1AFFEAB7004B13A0 /* CourseTests.swift */; };
 		1C0957D11AFFF4FC004B13A0 /* RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0957D01AFFF4FC004B13A0 /* RunTests.swift */; };
 		1C0957D21B000171004B13A0 /* Dollar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C85ABB71AEF271A00F10114 /* Dollar.framework */; };
+		1C1355C81B061A6400D3AA77 /* StatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1355C71B061A6400D3AA77 /* StatisticsController.swift */; };
 		1C1C279D1AF93D8B00E5E85C /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C1C279C1AF93D8B00E5E85C /* FontAwesome.otf */; };
 		1C1C279F1AF96D0C00E5E85C /* NewRunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1C279E1AF96D0C00E5E85C /* NewRunController.swift */; };
 		1C4B020D1AF7A678009F8BBD /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */; };
@@ -57,6 +58,7 @@
 		12DD99568232CAE902987917 /* Pods_CourseTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C0957CE1AFFEAB7004B13A0 /* CourseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTests.swift; sourceTree = "<group>"; };
 		1C0957D01AFFF4FC004B13A0 /* RunTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunTests.swift; sourceTree = "<group>"; };
+		1C1355C71B061A6400D3AA77 /* StatisticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
 		1C1C279C1AF93D8B00E5E85C /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		1C1C279E1AF96D0C00E5E85C /* NewRunController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRunController.swift; sourceTree = "<group>"; };
 		1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				1CD102641AEE7E9500AC6122 /* ViewController.swift */,
 				1CC550B31AEEEC220003EA8B /* TeamEmbedController.swift */,
 				1CC550B61AEF1BCA0003EA8B /* TeamCardController.swift */,
+				1C1355C71B061A6400D3AA77 /* StatisticsController.swift */,
 			);
 			name = "Main Screen";
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				1CD102921AEE8CBB00AC6122 /* Team.swift in Sources */,
 				1C74968D1AFBC0D300956433 /* Helper.swift in Sources */,
 				1CE3B85D1AF857EC00258BCE /* NewRunnerController.swift in Sources */,
+				1C1355C81B061A6400D3AA77 /* StatisticsController.swift in Sources */,
 				1C1C279F1AF96D0C00E5E85C /* NewRunController.swift in Sources */,
 				1CC550B71AEF1BCA0003EA8B /* TeamCardController.swift in Sources */,
 				1CD102601AEE7E9500AC6122 /* AppDelegate.swift in Sources */,

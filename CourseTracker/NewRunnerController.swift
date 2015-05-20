@@ -12,13 +12,15 @@ protocol ModalPresentControllerDelegate {
     func controllerDidDismiss(controller: UIViewController)
 }
 
-class NewRunnerController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class NewRunnerController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     let context = Runner.defaultContext()
     var runner: Runner?
     var delegate: ModalPresentControllerDelegate?
+    var teams = [Team]()
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var agePicker: UIPickerView!
+    @IBOutlet weak var teamPicker: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,7 @@ class NewRunnerController: UITableViewController, UIPickerViewDataSource, UIPick
         super.viewWillAppear(animated)
         context.beginTransaction()
         runner = Runner()
-        runner!.team = Team.forRunner(runner!, inCourse: Course.current()!)
+        teams = Course.current()!.teams.allObjects as! [Team]
     }
     
     @IBAction func cancel(sender: AnyObject) {
@@ -41,7 +43,7 @@ class NewRunnerController: UITableViewController, UIPickerViewDataSource, UIPick
         })
     }
     
-    @IBAction func done(sender: AnyObject) {
+    @IBAction func done(sender: AnyObject?) {
         runner!.validate { (success, error) in
             if success {
                 self.context.endTransactions()
@@ -57,6 +59,16 @@ class NewRunnerController: UITableViewController, UIPickerViewDataSource, UIPick
         }
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        switch textField {
+        case firstNameField:
+            lastNameField.becomeFirstResponder()
+        default:
+            done(nil)
+        }
+        return true
+    }
+    
     func firstNameChanged() {
         runner!.firstName = firstNameField.text
     }
@@ -70,14 +82,21 @@ class NewRunnerController: UITableViewController, UIPickerViewDataSource, UIPick
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 100
+        return pickerView == agePicker ? 100 : teams.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return "\(row + 2)"
+        return pickerView == agePicker ? "\(row + 2)" : teams[row].name!
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        runner!.age = NSNumber(integer: row+2)
+        if pickerView == agePicker {
+            runner!.age = NSNumber(integer: row+2)
+            runner!.team = nil
+            runner!.team = Team.forRunner(runner!, inCourse: Course.current()!)
+            teamPicker.selectRow((teams as NSArray).indexOfObject(runner!.team!), inComponent: 0, animated: true)
+        } else {
+            runner!.team = teams[row]
+        }
     }
 }

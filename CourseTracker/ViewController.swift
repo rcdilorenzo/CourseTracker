@@ -103,7 +103,7 @@ class ViewController: UIViewController, RunnerSearchDelegate, ModalPresentContro
     func runnerSearchSelectedCreate(searchController: RunnerTableController) {
         searchController.dismissViewControllerAnimated(true, completion: { () -> Void in
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("newRunner") as! UINavigationController
-            controller.preferredContentSize = CGSizeMake(320, 250)
+            controller.preferredContentSize = CGSizeMake(400, 300)
             controller.modalPresentationStyle = UIModalPresentationStyle.FormSheet
             (controller.topViewController as! NewRunnerController).delegate = self
             self.presentViewController(controller, animated: true, completion: nil)

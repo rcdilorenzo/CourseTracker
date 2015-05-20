@@ -50,6 +50,7 @@ class NewRunController: UIViewController, UITableViewDataSource, UITableViewDele
         context.endTransactions()
         context.save()
         dismissViewControllerAnimated(true, completion: nil)
+        (run!.runners.anyObject() as! Runner).team!.updateScore()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -78,7 +79,7 @@ class NewRunController: UIViewController, UITableViewDataSource, UITableViewDele
         durationLabel.hidden = false
         run!.startRun()
         updateTimecode()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0 / 60.0, target: self, selector: "updateTimecode", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0 / 30.0, target: self, selector: "updateTimecode", userInfo: nil, repeats: true)
     }
     
     @IBAction func stopButtonPressed(sender: UIButton) {

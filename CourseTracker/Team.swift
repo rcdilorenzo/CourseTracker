@@ -16,6 +16,7 @@ public class Team: NSManagedObject {
     @NSManaged public var color: UIColor?
     @NSManaged public var name: String?
     @NSManaged public var course: Course
+    @NSManaged public var score: Double
     @NSManaged var runners: NSSet
     
     public convenience init(course: Course) {
@@ -45,6 +46,16 @@ public class Team: NSManagedObject {
             return age.doubleValue > course.averageAge() ? sortedTeams.first! : sortedTeams.last!
         }
         return sortedTeams.first!
+    }
+    
+    public func updateScore() {
+        let allRuns = runs()
+        if allRuns.count < 3 {
+            score = Double.infinity
+            return
+        }
+        let sortedRuns = Array(allRuns.sorted({ $0.timeInterval < $1.timeInterval })[0..<3])
+        score =  $.reduce(sortedRuns, initial: 0, combine: { $0 + $1.timeInterval })
     }
     
     public func averageAge() -> Double {

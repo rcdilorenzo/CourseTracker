@@ -47,7 +47,7 @@ class TeamEmbedController : UIViewController {
         if Course.current() == nil {
             return
         }
-        teams = Team.findAllByAttribute("course", value: Course.current()!) as! [Team]
+        teams = (Team.findAllByAttribute("course", value: Course.current()!) as! [Team]).sorted({ $0.name < $1.name })
         for controller in controllers {
             controller.removeFromParentViewController()
             controller.view.removeFromSuperview()
