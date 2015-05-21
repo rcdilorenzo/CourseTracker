@@ -72,7 +72,7 @@ class TeamStatsDelegate: NSObject, UITableViewDataSource, UITableViewDelegate, N
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! TeamRankCell
         let team = fetchedResultsController.objectAtIndexPath(indexPath) as! Team
-        cell.titleLabel.text = team.name
+        cell.titleLabel.text = "\(indexPath.row + 1). \(team.name!)"
         cell.subtitleLabel.text = "\(team.runners.count) Runner(s)"
         cell.detailLabel.text = team.score != Double.infinity ? "\(formatTimeInSec(NSTimeInterval(team.score)))" : ""
         cell.backgroundColor = UIColor.clearColor()
@@ -85,24 +85,40 @@ class TeamStatsDelegate: NSObject, UITableViewDataSource, UITableViewDelegate, N
 }
 
 
-class RunnerAgeRangeStatsDelegate: NSObject, UITableViewDataSource, UITableViewDelegate {
+class RunnerAgeRangeStatsDelegate: NSObject, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     let cellID = "default"
     var cuttoffAge: Int
     var rangeType: AgeRangeCuttoff
     let tableView: UITableView
+    let fetchedResultsController: NSFetchedResultsController
+    let limit = 30
     
     init(table: UITableView, cuttoffAge: Int, rangeType: AgeRangeCuttoff) {
         self.cuttoffAge = cuttoffAge
         self.rangeType = rangeType
+        let fetchRequest = Runner.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true)]
+        switch rangeType {
+            case AgeRangeCuttoff.Under:
+                fetchRequest.predicate = NSPredicate(format: "age < \(cuttoffAge)")
+            case AgeRangeCuttoff.AtAndOver:
+                fetchRequest.predicate = NSPredicate(format: "age >= \(cuttoffAge)")
+        }
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Runner.defaultContext(), sectionNameKeyPath: nil, cacheName: nil)
         tableView = table
         super.init()
-        notificationCenter.addObserver(self, selector: "reloadData", name:NSManagedObjectContextObjectsDidChangeNotification, object: nil)
+        fetchedResultsController.delegate = self
+        fetchedResultsController.performFetch(nil)
+        notificationCenter.addObserver(self, selector: "reloadData:", name:NSManagedObjectContextObjectsDidChangeNotification, object: nil)
         table.delegate = self
         table.dataSource = self
         table.reloadData()
     }
     
-    func reloadData() {
+    func reloadData(notification: NSNotification?) {
+        if notification != nil {
+            fetchedResultsController.performFetch(nil)
+        }
         tableView.reloadData()
     }
     
@@ -111,11 +127,17 @@ class RunnerAgeRangeStatsDelegate: NSObject, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        let sectionInfo = fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+        return min(sectionInfo.numberOfObjects, limit)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! TeamRankCell
+        let runner = (fetchedResultsController.fetchedObjects! as! [Runner]).sorted({ $0.fastestRunTime() < $1.fastestRunTime() })[indexPath.row]
+        cell.titleLabel.text = "\(indexPath.row + 1). \(runner.name())"
+        cell.subtitleLabel.text = runner.fastestRun() == nil ? "" : "Run at \(runner.fastestRun()!.timeDescription())"
+        cell.detailLabel.text = runner.fastestRun() == nil ? "" : "\(formatTimeInSec(runner.fastestRunTime()))"
+        cell.backgroundColor = UIColor.clearColor()
         return cell
     }
 }

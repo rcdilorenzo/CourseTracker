@@ -44,9 +44,7 @@ class NewTeamController: UITableViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
         } else if context.save() {
-            dismissViewControllerAnimated(true, completion: {
-                NSNotificationCenter.defaultCenter().postNotificationName("TeamsChanged", object: nil)
-            })
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

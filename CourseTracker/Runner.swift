@@ -42,6 +42,14 @@ public class Runner: NSManagedObject {
         return managedObjectContext!.executeFetchRequest(request)?.first as? Run
     }
     
+    public func fastestRunTime() -> NSTimeInterval {
+        if let run = fastestRun() {
+            return run.timeInterval
+        } else {
+            return Double.infinity
+        }
+    }
+    
     public func fastestRunDescription() -> String {
         if let run = fastestRun() {
             return "Best Time: \(formatTimeInSec(run.timeInterval))"

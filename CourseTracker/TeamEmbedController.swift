@@ -7,13 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 let cardSpacer = CGFloat(15)
 let cardWidth = CGFloat(250)
 
 class TeamEmbedController : UIViewController {
-    
-
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var scrollView: UIScrollView!
     var teams = [Team]()
@@ -32,9 +31,7 @@ class TeamEmbedController : UIViewController {
         toolbar.tintColor = primaryColor()
         view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
-        NSNotificationCenter.defaultCenter().addObserverForName("TeamsChanged", object: nil, queue: nil) { (_) -> Void in
-            self.refreshData()
-        }
+        notificationCenter.addObserver(self, selector: "refreshData", name: NSManagedObjectContextObjectsDidChangeNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
