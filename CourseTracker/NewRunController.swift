@@ -48,6 +48,8 @@ class NewRunController: UIViewController, UITableViewDataSource, UITableViewDele
     
     @IBAction func save(sender: UIBarButtonItem) {
         context.endTransactions()
+        let duplicateRuns = Run.fromRunners(run!.runners.allObjects as! [Runner])
+        Run.deleteAllButFastestRun(duplicateRuns)
         context.save()
         dismissViewControllerAnimated(true, completion: nil)
         (run!.runners.anyObject() as! Runner).team!.updateScore()

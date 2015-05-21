@@ -10,7 +10,7 @@ import UIKit
 import XCTest
 import CoreData
 import CourseTracker
-
+import Dollar
 
 class RunTests: XCTestCase {
     let context: NSManagedObjectContext = inMemoryContext()
@@ -40,6 +40,33 @@ class RunTests: XCTestCase {
     func testGettingManyRunnerNames() {
         let run = Run(runners: [runner1!, runner2!, runner3!])
         XCTAssertEqual(run.runnerNames(), "Amy S, John D, and Rick J")
+    }
+    
+    func testGettingRunFromRunners() {
+        let run1 = Run(runners: [runner1!, runner3!])
+        run1.timeInterval = 23.4
+        let run2 = Run(runners: [runner1!, runner3!])
+        run2.timeInterval = 21.6
+        let run3 = Run(runners: [runner2!, runner3!])
+        run3.timeInterval = 11.2
+        XCTAssert($.contains(Run.fromRunners([runner1!, runner3!]), value: run2))
+        XCTAssertFalse($.contains(Run.fromRunners([runner1!, runner3!]), value: run3))
+        
+        XCTAssertEqual(([run1, run2] as NSArray).valueForKeyPath("@min.timeInterval") as! Double, 21.6)
+    }
+    
+    func testDeletingAllButFastestRun() {
+        let run1 = Run(runners: [runner1!])
+        run1.timeInterval = 23.4
+        let run2 = Run(runners: [runner1!])
+        run2.timeInterval = 21.6
+        let run3 = Run(runners: [runner1!])
+        run3.timeInterval = 11.2
+        
+        Run.deleteAllButFastestRun([run1, run3, run2])
+        XCTAssert(run1.deleted)
+        XCTAssert(run2.deleted)
+        XCTAssertFalse(run3.deleted)
     }
     
 }

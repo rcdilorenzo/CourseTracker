@@ -13,8 +13,8 @@ public class Run: NSManagedObject {
 
     @NSManaged var end: NSDate?
     @NSManaged var start: NSDate?
-    @NSManaged var runners: NSSet
-    @NSManaged var timeInterval: Double
+    @NSManaged public var runners: NSSet
+    @NSManaged public var timeInterval: Double
 
     public convenience init(runners: [Runner]) {
         self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
@@ -34,8 +34,33 @@ public class Run: NSManagedObject {
         return formatter
     }()
     
+    // TODO: should be scoped to the course
+    public class func fromRunners(runners: [Runner]) -> [Run] {
+        let fetchRequest = self.fetchRequest()
+        var predicates = [NSPredicate]()
+        for runner in runners {
+            predicates += [NSPredicate(format: "%@ IN runners", runner)]
+        }
+        predicates += [NSPredicate(format: "runners.@count == \(runners.count)")]
+        fetchRequest.predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: predicates)
+        if let runs = defaultContext().executeFetchRequest(fetchRequest) as? [Run] {
+            return runs
+        } else {
+            return []
+        }
+    }
+    
+    public class func deleteAllButFastestRun(runs: [Run]) {
+        let fastestTime = (runs as NSArray).valueForKeyPath("@min.timeInterval") as! Double
+        for run in runs {
+            if run.timeInterval != fastestTime {
+                defaultContext().deleteObject(run)
+            }
+        }
+    }
+    
     func timeDescription() -> String {
-        return timeFormatter.stringFromDate(start!)
+        return start == nil ? "" : timeFormatter.stringFromDate(start!)
     }
     
     public func runnerNames() -> String {
