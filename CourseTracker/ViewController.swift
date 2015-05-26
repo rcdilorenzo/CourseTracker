@@ -12,6 +12,7 @@ import Dollar
 
 class ViewController: UIViewController, RunnerSearchDelegate, ModalPresentControllerDelegate {
     var runnerController: RunnerTableController?
+    var popover: UIPopoverController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,10 @@ class ViewController: UIViewController, RunnerSearchDelegate, ModalPresentContro
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         let navigationBar = navigationController!.navigationBar
+        let runsBarItem = UIBarButtonItem(image: FAKFontAwesome.clockOIconWithSize(22).imageWithSize(CGSizeMake(22, 22)), style: .Plain, target: self, action: "showRuns:")
+        
         let usersBarItem = UIBarButtonItem(image: FAKFontAwesome.usersIconWithSize(22).imageWithSize(CGSizeMake(22, 22)), style: UIBarButtonItemStyle.Plain, target: self, action: "showRunnerController")
-        navigationBar.topItem!.rightBarButtonItems = [navigationBar.topItem!.rightBarButtonItem!, usersBarItem]
+        navigationBar.topItem!.rightBarButtonItems = [navigationBar.topItem!.rightBarButtonItem!, usersBarItem, runsBarItem]
         navigationBar.tintColor = primaryColor()
         if let course = Course.current() {
             self.navigationItem.title = course.name
@@ -69,6 +72,28 @@ class ViewController: UIViewController, RunnerSearchDelegate, ModalPresentContro
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .Done, target: self, action: "newRunWithSelectedRunners")
         navigationItem.rightBarButtonItem!.enabled = false
         navigationController?.presentViewController(navigation, animated: true, completion: nil)
+    }
+    
+    @IBAction func showRuns(sender: UIBarButtonItem) {
+        if popover != nil && popover!.popoverVisible {
+            popover!.dismissPopoverAnimated(true)
+            return
+        }
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("runs") as! LiveRunsController
+        popover = UIPopoverController(contentViewController: controller)
+        controller.popover = popover
+        popover!.presentPopoverFromBarButtonItem(sender, permittedArrowDirections: .Up, animated: true)
+    }
+    
+    @IBAction func resetAllData(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Delete all data?", message: "This action cannot be undone.", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "Delete All", style: UIAlertActionStyle.Destructive) { (action) -> Void in
+            Team.deleteAll()
+            Runner.deleteAll()
+        }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+        alertController.addAction(action)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func cancelNewRun() {

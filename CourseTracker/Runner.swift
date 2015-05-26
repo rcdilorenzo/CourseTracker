@@ -35,11 +35,9 @@ public class Runner: NSManagedObject {
     }
     
     public func fastestRun() -> Run? {
-        let request = Run.fetchRequest()
-        request.predicate = NSPredicate(format: "(SELF in %@) AND (timeInterval > 0)", self.runs)
-        request.sortDescriptors = [NSSortDescriptor(key: "timeInterval", ascending: true)]
-        request.fetchLimit = 1
-        return managedObjectContext!.executeFetchRequest(request)?.first as? Run
+        let filteredRuns = Array(runs.filteredSetUsingPredicate(NSPredicate(format: "timeInterval > 0")))
+        let sortDescriptor = NSSortDescriptor(key: "timeInterval", ascending: true)
+        return (filteredRuns as NSArray).sortedArrayUsingDescriptors([sortDescriptor]).first as? Run
     }
     
     public func fastestRunTime() -> NSTimeInterval {

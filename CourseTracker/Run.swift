@@ -15,6 +15,7 @@ public class Run: NSManagedObject {
     @NSManaged var start: NSDate?
     @NSManaged public var runners: NSSet
     @NSManaged public var timeInterval: Double
+    @NSManaged public var running: Bool
 
     public convenience init(runners: [Runner]) {
         self.init(entity: self.dynamicType.entityDescription(), insertIntoManagedObjectContext: self.dynamicType.defaultContext())
@@ -80,6 +81,7 @@ public class Run: NSManagedObject {
     
     func startRun() {
         start = NSDate()
+        running = true
         end = nil
         timeInterval = 0
     }
@@ -87,5 +89,6 @@ public class Run: NSManagedObject {
     func stopRun() {
         end = NSDate()
         timeInterval = Double(end!.timeIntervalSinceDate(start!))
+        running = false
     }
 }

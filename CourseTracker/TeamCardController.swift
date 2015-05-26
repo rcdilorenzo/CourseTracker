@@ -16,6 +16,7 @@ class TeamCardController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var titleBackground: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    let context = Run.defaultContext()
     var runs: [Run] = []
     var team: Team? {
         didSet {
@@ -43,11 +44,24 @@ class TeamCardController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! TeamRankCell
+        cell.selectionStyle = .None
         let run = runs[indexPath.row]
-        let runners = run.runners.allObjects as! [Runner]
         cell.titleLabel.text = formatTimeInSec(run.timeInterval)
         cell.subtitleLabel.text = run.runnerNames()
         cell.detailLabel.text = run.timeDescription()
         return cell
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let run = runs[indexPath.row]
+            context.deleteObject(run)
+            context.save()
+            tableView.reloadData()
+        }
     }
 }

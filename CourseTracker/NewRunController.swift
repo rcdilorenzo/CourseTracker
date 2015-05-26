@@ -16,9 +16,18 @@ class NewRunController: UIViewController, UITableViewDataSource, UITableViewDele
     var runners = [Runner]()
     var run: Run?
     var timer: NSTimer?
+    var saveButton: UIBarButtonItem?
+    var hideButton: UIBarButtonItem?
     @IBOutlet weak var mainViewLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var durationField: UITextField!
     @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var startButton: UIButton!
+    
+    lazy var timeIntervalFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "mm:ss.SSS"
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,30 +38,74 @@ class NewRunController: UIViewController, UITableViewDataSource, UITableViewDele
                 NSForegroundColorAttributeName: UIColor.whiteColor()
             ]
             navigation.navigationBar.barStyle = UIBarStyle.BlackTranslucent
+            saveButton = navigation.navigationBar.topItem!.rightBarButtonItem!
+            saveButton!.enabled = false
+            hideButton = UIBarButtonItem(title: "Hide  ", style: UIBarButtonItemStyle.Done, target: self, action: "hideController")
+            hideButton!.enabled = false
+            navigation.navigationBar.topItem!.rightBarButtonItems = [saveButton!, hideButton!]
         }
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "hideTextField"))
+        durationField.addTarget(self, action: "textValueChanged:", forControlEvents: UIControlEvents.EditingChanged)
         mainViewLeftConstraint.constant = UIInterfaceOrientationIsLandscape(interfaceOrientation) ? defaultTableWidth : 0
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        context.beginTransaction()
-        run = Run(runners: runners)
-        stopButton.hidden = true
-        durationLabel.hidden = true
+        if run != nil {
+            startButtonPressed(startButton)
+        } else {
+            run = Run(runners: runners)
+            durationField.text = formatTimeInSec(0)
+            stopButton.hidden = true
+        }
+    }
+    
+    func hideTextField() {
+        view.endEditing(true)
+    }
+    
+    func textValueChanged(sender: UITextField) {
+        hideButton?.enabled = false
+        if let currentDate = timeIntervalFormatter.dateFromString(sender.text) {
+            saveButton?.enabled = true
+            sender.tintColor = nil
+            run!.start = NSDate()
+            run!.timeInterval = currentDate.timeIntervalSince1970
+        } else {
+            saveButton?.enabled = false
+            sender.tintColor = UIColor.redColor()
+        }
+    }
+    
+    func hideController() {
+        hideTextField()
+        context.save()
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func cancel(sender: AnyObject) {
-        context.undoTransaction()
+        hideTextField()
+        if timer != nil && timer!.valid {
+            stopButtonPressed(nil)
+        }
+        if let existingRun = run {
+            context.deleteObject(existingRun)
+            context.save()
+        }
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func save(sender: UIBarButtonItem) {
-        context.endTransactions()
+        hideTextField()
+        if timer != nil && timer!.valid {
+            stopButtonPressed(nil)
+        }
+        let team = (run!.runners.anyObject() as! Runner).team!
         let duplicateRuns = Run.fromRunners(run!.runners.allObjects as! [Runner])
         Run.deleteAllButFastestRun(duplicateRuns)
+        team.updateScore()
         context.save()
         dismissViewControllerAnimated(true, completion: nil)
-        (run!.runners.anyObject() as! Runner).team!.updateScore()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -76,21 +129,26 @@ class NewRunController: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     @IBAction func startButtonPressed(sender: UIButton) {
+        saveButton?.enabled = true
+        hideButton?.enabled = true
         sender.hidden = true
+        durationField.userInteractionEnabled = false
         stopButton.hidden = false
-        durationLabel.hidden = false
-        run!.startRun()
+        if !run!.running {
+            run!.startRun()
+        }
         updateTimecode()
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0 / 30.0, target: self, selector: "updateTimecode", userInfo: nil, repeats: true)
     }
     
-    @IBAction func stopButtonPressed(sender: UIButton) {
+    @IBAction func stopButtonPressed(sender: UIButton?) {
         run!.stopRun()
-        sender.removeTarget(self, action: "stopButtonPressed:", forControlEvents: .TouchUpInside)
-        sender.addTarget(self, action: "resetButtonPressed:", forControlEvents: .TouchUpInside)
-        sender.setTitle("Reset", forState: .Normal)
-        sender.backgroundColor = primaryColor()
+        sender?.removeTarget(self, action: "stopButtonPressed:", forControlEvents: .TouchUpInside)
+        sender?.addTarget(self, action: "resetButtonPressed:", forControlEvents: .TouchUpInside)
+        sender?.setTitle("Reset", forState: .Normal)
+        sender?.backgroundColor = primaryColor()
         timer!.invalidate()
+        durationField.userInteractionEnabled = true
     }
     
     func resetButtonPressed(sender: UIButton) {
@@ -102,6 +160,8 @@ class NewRunController: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func updateTimecode() {
-        durationLabel.text = formatTimeInSec(run!.start!.timeIntervalSinceNow * -1)
+        if let start = run?.start {
+            durationField.text = formatTimeInSec(run!.start!.timeIntervalSinceNow * -1)
+        }
     }
 }

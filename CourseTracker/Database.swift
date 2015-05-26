@@ -51,6 +51,15 @@ extension NSManagedObjectContext {
 }
 
 public extension NSManagedObject {
+    class func deleteAll() {
+        let context = defaultContext()
+        let objects = context.executeFetchRequest(fetchRequest())!
+        for object in objects {
+            context.deleteObject(object)
+        }
+        context.save()
+    }
+    
     public class func defaultContext() -> NSManagedObjectContext {
         return delegate.managedObjectContext!
     }

@@ -14,6 +14,7 @@
 		1C1355C81B061A6400D3AA77 /* StatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1355C71B061A6400D3AA77 /* StatisticsController.swift */; };
 		1C1C279D1AF93D8B00E5E85C /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C1C279C1AF93D8B00E5E85C /* FontAwesome.otf */; };
 		1C1C279F1AF96D0C00E5E85C /* NewRunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1C279E1AF96D0C00E5E85C /* NewRunController.swift */; };
+		1C2F591E1B127F86008E2580 /* LiveRunsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F591D1B127F86008E2580 /* LiveRunsController.swift */; };
 		1C4B020D1AF7A678009F8BBD /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */; };
 		1C74968D1AFBC0D300956433 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74968C1AFBC0D300956433 /* Helper.swift */; };
 		1C74968F1AFBC10E00956433 /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74968E1AFBC10E00956433 /* HelperTests.swift */; };
@@ -61,6 +62,7 @@
 		1C1355C71B061A6400D3AA77 /* StatisticsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
 		1C1C279C1AF93D8B00E5E85C /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		1C1C279E1AF96D0C00E5E85C /* NewRunController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRunController.swift; sourceTree = "<group>"; };
+		1C2F591D1B127F86008E2580 /* LiveRunsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveRunsController.swift; sourceTree = "<group>"; };
 		1C4B020C1AF7A678009F8BBD /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		1C74968C1AFBC0D300956433 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		1C74968E1AFBC10E00956433 /* HelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				1CC550B31AEEEC220003EA8B /* TeamEmbedController.swift */,
 				1CC550B61AEF1BCA0003EA8B /* TeamCardController.swift */,
 				1C1355C71B061A6400D3AA77 /* StatisticsController.swift */,
+				1C2F591D1B127F86008E2580 /* LiveRunsController.swift */,
 			);
 			name = "Main Screen";
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				1CD102911AEE8CBB00AC6122 /* Runner.swift in Sources */,
 				1CD102901AEE8CBB00AC6122 /* Run.swift in Sources */,
 				1CD102631AEE7E9500AC6122 /* CourseTracker.xcdatamodeld in Sources */,
+				1C2F591E1B127F86008E2580 /* LiveRunsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

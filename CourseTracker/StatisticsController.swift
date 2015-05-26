@@ -71,10 +71,15 @@ class TeamStatsDelegate: NSObject, UITableViewDataSource, UITableViewDelegate, N
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! TeamRankCell
+        cell.selectionStyle = .None
         let team = fetchedResultsController.objectAtIndexPath(indexPath) as! Team
-        cell.titleLabel.text = "\(indexPath.row + 1). \(team.name!)"
+        if let name = team.name {
+            cell.titleLabel.text = "\(indexPath.row + 1). \(name)"
+        } else {
+            cell.titleLabel.text = ""
+        }
         cell.subtitleLabel.text = "\(team.runners.count) Runner(s)"
-        cell.detailLabel.text = team.score != Double.infinity ? "\(formatTimeInSec(NSTimeInterval(team.score)))" : ""
+        cell.detailLabel.text = team.score == 0 || team.score == Double.infinity ? "" : "\(formatTimeInSec(NSTimeInterval(team.score)))"
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }
@@ -104,7 +109,7 @@ class RunnerAgeRangeStatsDelegate: NSObject, UITableViewDataSource, UITableViewD
             case AgeRangeCuttoff.AtAndOver:
                 fetchRequest.predicate = NSPredicate(format: "age >= \(cuttoffAge)")
         }
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Runner.defaultContext(), sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: Runner.defaultContext(), sectionNameKeyPath: nil, cacheName: "stats")
         tableView = table
         super.init()
         fetchedResultsController.delegate = self
@@ -133,8 +138,9 @@ class RunnerAgeRangeStatsDelegate: NSObject, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! TeamRankCell
+        cell.selectionStyle = .None
         let runner = (fetchedResultsController.fetchedObjects! as! [Runner]).sorted({ $0.fastestRunTime() < $1.fastestRunTime() })[indexPath.row]
-        cell.titleLabel.text = "\(indexPath.row + 1). \(runner.name())"
+        cell.titleLabel.text = runner.firstName != nil && runner.lastName != nil ? "\(indexPath.row + 1). \(runner.name())" : ""
         cell.subtitleLabel.text = runner.fastestRun() == nil ? "" : "Run at \(runner.fastestRun()!.timeDescription())"
         cell.detailLabel.text = runner.fastestRun() == nil ? "" : "\(formatTimeInSec(runner.fastestRunTime()))"
         cell.backgroundColor = UIColor.clearColor()
